@@ -754,19 +754,24 @@ async function fbDel(col, id){
   catch(e){ setSyncStatus('error'); }
 }
 async function fbGetAll(col){
-  const snap = await getDocs(collection(db,col));
-  return snap.docs.map(d=>({...d.data(),id:d.id}));
+  try {
+    const snap = await getDocs(collection(db,col));
+    return snap.docs.map(d=>({...d.data(),id:d.id}));
+  } catch(e) {
+    console.warn('fbGetAll error for', col, e);
+    return [];
+  }
 }
 
 // ===================================
 // INIT - cargar o sembrar datos
 // ===================================
 async function init(){
-  // Timeout de 8 segundos - si Firebase no responde, carga igual
+  // Timeout de 15 segundos
   const timeout = new Promise(resolve => setTimeout(() => {
     console.warn('Firebase timeout - cargando sin datos');
     resolve('timeout');
-  }, 8000));
+  }, 15000));
 
   try {
     const result = await Promise.race([
@@ -800,10 +805,12 @@ async function init(){
 }
 
 async function initFirebase(){
+  const msg = document.getElementById('splash-msg');
   // Verificar si ya hay datos
+  msg.textContent = 'Verificando datos...';
   const snap = await getDocs(collection(db,'trabajos'));
   if(snap.empty){
-    toast('Primera vez - cargando datos...');
+    msg.textContent = 'Primera vez — cargando datos...';
     for(const t of TI) await setDoc(doc(db,'trabajos',t.id),t);
     for(const c of CI) await setDoc(doc(db,'cobros',c.id),c);
     for(const g of GF_INICIALES) await setDoc(doc(db,'gastosFijos',g.id),g);
@@ -812,11 +819,15 @@ async function initFirebase(){
   }
 
   // Cargar todo
+  msg.textContent = 'Cargando trabajos...';
   trabajos = await fbGetAll('trabajos');
+  msg.textContent = 'Cargando cobros...';
   cobros = await fbGetAll('cobros');
+  msg.textContent = 'Cargando gastos...';
   gastos = await fbGetAll('gastos');
   gastosFijos = await fbGetAll('gastosFijos');
   presupuestos = await fbGetAll('presupuestos');
+  msg.textContent = 'Cargando finanzas...';
   compromisos = await fbGetAll('compromisos');
   pagosFin = await fbGetAll('pagosFin');
   compras = await fbGetAll('compras');
