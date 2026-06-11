@@ -1098,6 +1098,7 @@ function renderDash(){
   }
   if(document.getElementById('d-sueldo-calc')) document.getElementById('d-sueldo-calc').textContent=fmt(sueldoCalc);
   if(document.getElementById('d-sueldo-s')) document.getElementById('d-sueldo-s').textContent=sueldoLabel;
+  const pct=Math.min(100,Math.round(ganM/META*100));
   const bar=document.getElementById('mb');bar.style.width=pct+'%';bar.className='pf'+(pct>=100?' gr':pct<30?' rd':'');
   document.getElementById('ml').textContent='Ganancia: '+fmt(ganM);document.getElementById('mr').textContent=pct+'%';
   const diario=dh>0?Math.round(ganM/dh):0,dr=25-dh,nec=dr>0?Math.round((META-ganM)/dr):0;
