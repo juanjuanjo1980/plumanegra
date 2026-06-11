@@ -22,7 +22,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;min-height:100vh;overscroll-behavior:none;}
-
+ 
 /* SPLASH */
 #splash{position:fixed;inset:0;background:#f5ede0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s;}
 #splash.hide{opacity:0;pointer-events:none;}
@@ -30,7 +30,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .splash-sub{font-size:13px;color:var(--text3);}
 .splash-spin{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin-top:32px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
+ 
 /* NAV */
 .nav{position:sticky;top:0;z-index:100;background:rgba(245,237,224,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;height:52px;}
 .brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);letter-spacing:.04em;margin-right:16px;flex-shrink:0;}
@@ -39,14 +39,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .tab{padding:6px 11px;border:none;background:none;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;border-radius:8px;transition:all .2s;white-space:nowrap;}
 .tab:hover{color:var(--text2);background:var(--bg3);}
 .tab.on{color:var(--gold);background:var(--gold-dim);font-weight:500;}
-
+ 
 /* PAGES */
 .pg{display:none;padding:16px 16px 80px;max-width:1000px;margin:0 auto;}
 .pg.on{display:block;}
 .ptitle{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:2px;}
 .psub{font-size:11px;color:var(--text3);margin-bottom:20px;}
 .slabel{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin:20px 0 8px;}
-
+ 
 /* KPI */
 .kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:4px;}
 .kgrid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
@@ -55,13 +55,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .kpi-v{font-size:21px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;}
 .kpi-s{font-size:10px;color:var(--text3);margin-top:2px;}
 .kpi.gd .kpi-v{color:var(--gold);}.kpi.gr .kpi-v{color:#7ab87a;}.kpi.rd .kpi-v{color:#c47a7a;}.kpi.am .kpi-v{color:#d4a060;}
-
+ 
 /* CARD */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);overflow:hidden;margin-bottom:12px;}
 .ch{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);background:var(--bg3);}
 .ct{font-size:13px;font-weight:500;color:var(--text);}
 .cb{padding:16px;}
-
+ 
 /* FORM */
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .fi{display:flex;flex-direction:column;gap:4px;}
@@ -70,7 +70,7 @@ label{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:.04em;tex
 input,select,textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s;width:100%;}
 input:focus,select:focus,textarea:focus{border-color:var(--gold);}
 select option{background:var(--bg3);}
-
+ 
 /* BUTTONS */
 .btn{padding:9px 16px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .bp{background:var(--gold);color:#0f0d0a;}.bp:hover{background:var(--gold2);}
@@ -78,7 +78,7 @@ select option{background:var(--bg3);}
 .bdr{background:var(--red-bg);color:#c47a7a;border:1px solid rgba(154,74,74,.3);}
 .bsm{padding:5px 9px;font-size:11px;}
 .brow{display:flex;gap:8px;margin-top:12px;align-items:center;flex-wrap:wrap;}
-
+ 
 /* TABLE */
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 table{width:100%;border-collapse:collapse;font-size:12px;}
@@ -87,7 +87,7 @@ th.r,td.r{text-align:right;}
 td{padding:9px 10px;color:var(--text2);border-bottom:1px solid var(--border);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 td strong{color:var(--text);font-weight:500;}
-
+ 
 /* ESTADO SELECT */
 .esel{font-size:11px;padding:3px 7px;border-radius:20px;border:none;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;outline:none;width:126px;}
 .e-presupuestado{background:rgba(255,255,255,.06);color:var(--text3);}
@@ -95,28 +95,28 @@ td strong{color:var(--text);font-weight:500;}
 .e-en_produccion{background:var(--amber-bg);color:#d4a060;}
 .e-terminado{background:var(--green-bg);color:#7ab87a;}
 .e-entregado{background:var(--green-bg);color:#7ab87a;}
-
+ 
 /* BADGES */
 .bx{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;}
 .bx-gr{background:var(--green-bg);color:#7ab87a;}.bx-rd{background:var(--red-bg);color:#c47a7a;}
 .bx-am{background:var(--amber-bg);color:#d4a060;}.bx-bl{background:var(--blue-bg);color:#7a9ac4;}.bx-gy{background:rgba(255,255,255,.06);color:var(--text3);}
-
+ 
 /* PROGRESS */
 .pt{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;}
 .pf{height:100%;border-radius:3px;background:var(--gold);transition:width .5s;}.pf.gr{background:#5a8a5a;}
-
+ 
 /* CHARTS */
 .bar-chart{display:flex;align-items:flex-end;gap:4px;height:140px;padding-bottom:20px;min-width:280px;}
 .bar-col{display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;}
 .bar-stack{width:100%;border-radius:3px 3px 0 0;cursor:pointer;position:relative;}
 .bar-stack:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--text);font-size:10px;padding:3px 7px;border-radius:5px;white-space:nowrap;z-index:10;margin-bottom:3px;}
 .bar-label{font-size:9px;color:var(--text3);margin-top:4px;text-align:center;}
-
+ 
 /* ALERT */
 .alert{border-radius:var(--r);padding:11px 14px;font-size:12px;line-height:1.6;margin-bottom:10px;display:flex;align-items:flex-start;gap:7px;}
 .al-am{background:var(--amber-bg);border:1px solid rgba(168,122,58,.3);color:#d4a060;}
 .al-gr{background:var(--green-bg);border:1px solid rgba(90,138,90,.3);color:#7ab87a;}
-
+ 
 /* PLANTILLAS */
 .tg{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .tc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;transition:all .2s;}
@@ -127,32 +127,32 @@ td strong{color:var(--text);font-weight:500;}
 .tc.open .tb{display:block;}
 .tcb{margin-top:6px;font-size:11px;color:var(--gold);background:var(--gold-dim);border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;display:none;}
 .tc.open .tcb{display:inline-flex;}
-
+ 
 /* GASTOS FIJOS */
 .gf-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border-radius:8px;margin-bottom:6px;}
-
+ 
 /* BOTTOM NAV MOBILE */
 .bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(245,237,224,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:8px 0 env(safe-area-inset-bottom);z-index:100;}
 .bnav-items{display:flex;justify-content:space-around;}
 .bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 8px;cursor:pointer;border:none;background:none;color:var(--text3);font-family:'DM Sans',sans-serif;font-size:9px;transition:all .2s;}
 .bnav-item.on{color:var(--gold);}
 .bnav-icon{font-size:20px;}
-
+ 
 /* SYNC INDICATOR */
 .sync{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:4px;}
 .sdot{width:6px;height:6px;border-radius:50%;background:#7ab87a;flex-shrink:0;}
 .sdot.syncing{background:#d4a060;animation:pulse 1s infinite;}
 .sdot.error{background:#c47a7a;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-
+ 
 /* TOAST */
 #toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
-
+ 
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:var(--bg2);}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-
+ 
 @media(max-width:600px){
   .kgrid4{grid-template-columns:1fr 1fr;}
   .fg,.tg{grid-template-columns:1fr;}
@@ -169,7 +169,7 @@ td strong{color:var(--text);font-weight:500;}
 </style>
 </head>
 <body>
-
+ 
 <div id="splash">
   <div class="splash-logo">🪶 Plumanegra</div>
   <div class="splash-sub" id="splash-msg">Conectando con Firebase...</div>
@@ -177,9 +177,9 @@ td strong{color:var(--text);font-weight:500;}
   <div id="splash-error" style="display:none;margin-top:20px;padding:16px;background:rgba(200,50,50,0.15);border-radius:10px;max-width:320px;font-size:12px;color:#8B1A1A;text-align:center;line-height:1.6"></div>
   <button id="splash-retry" onclick="location.reload()" style="display:none;margin-top:16px;background:#8B5E1A;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">Reintentar</button>
 </div>
-
+ 
 <div id="toast"></div>
-
+ 
 <!-- DESKTOP NAV -->
 <nav class="nav">
   <div class="brand">🪶 Plumanegra</div>
@@ -201,18 +201,18 @@ td strong{color:var(--text);font-weight:500;}
     <span id="sync-text">online</span>
   </div>
 </nav>
-
+ 
 <!-- MOBILE HEADER -->
 <div class="brand-mobile">
   <div class="brand-mobile-title">🪶 Plumanegra</div>
   <div class="sync" id="sync-status-m"><div class="sdot" id="sync-dot-m"></div><span id="sync-text-m">online</span></div>
 </div>
-
+ 
 <!-- DASHBOARD -->
 <div id="pg-dashboard" class="pg on">
   <div class="ptitle">Dashboard</div>
   <div class="psub" id="dash-sub">cargando...</div>
-
+ 
   <!-- BOTÓN EXPORTAR RESUMEN -->
   <div style="margin-bottom:16px">
     <button onclick="exportarResumen()" style="background:#8B5E1A;color:#fff;border:none;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:8px">
@@ -249,7 +249,7 @@ td strong{color:var(--text);font-weight:500;}
   <div class="slabel">🎁 Día del Padre — 21 jun</div>
   <div class="alert al-am"><span>⚡</span><span>Quedan <strong id="dias-padre">—</strong> días. Activar catálogo tablas + cubiertos esta semana. Sets grabados con láser son el producto ideal.</span></div>
 </div>
-
+ 
 <!-- TRABAJOS -->
 <div id="pg-trabajos" class="pg">
   <div class="ptitle">Trabajos</div>
@@ -286,7 +286,7 @@ td strong{color:var(--text);font-weight:500;}
     <tbody id="tb-trab"></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- PRESUPUESTOS -->
 <div id="pg-presupuestos" class="pg">
   <div class="ptitle">Presupuestos</div>
@@ -316,7 +316,7 @@ td strong{color:var(--text);font-weight:500;}
     <tbody id="tb-pres"></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- COBRANZAS -->
 <div id="pg-cobranzas" class="pg">
   <div class="ptitle">Cobranzas</div>
@@ -344,7 +344,7 @@ td strong{color:var(--text);font-weight:500;}
     <tbody id="tb-cob"></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- GASTOS VARIABLES -->
 <div id="pg-gastos" class="pg">
   <div class="ptitle">Gastos Variables</div>
@@ -372,7 +372,7 @@ td strong{color:var(--text);font-weight:500;}
     <tbody id="tb-gas"></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- GASTOS FIJOS -->
 <div id="pg-gastosfijos" class="pg">
   <div class="ptitle">Gastos Fijos</div>
@@ -411,7 +411,7 @@ td strong{color:var(--text);font-weight:500;}
     </div>
   </div>
 </div>
-
+ 
 <!-- ESTADÍSTICAS -->
 <div id="pg-estadisticas" class="pg">
   <div class="ptitle">Estadísticas</div>
@@ -436,7 +436,7 @@ td strong{color:var(--text);font-weight:500;}
     <div class="kpi gr"><div class="kpi-l">Margen promedio</div><div class="kpi-v" id="e-margen">0%</div></div>
   </div>
 </div>
-
+ 
 <!-- OBJETIVOS -->
 <div id="pg-objetivos" class="pg">
   <div class="ptitle">Objetivos</div>
@@ -451,19 +451,19 @@ td strong{color:var(--text);font-weight:500;}
   <div class="slabel">Acciones prioritarias</div>
   <div id="obj-list"></div>
 </div>
-
+ 
 <!-- PLANTILLAS -->
 <div id="pg-plantillas" class="pg">
   <div class="ptitle">Plantillas</div>
   <div class="psub">Clic para ver y copiar al instante</div>
   <div class="tg" id="tpl-grid"></div>
 </div>
-
+ 
 <!-- FINANZAS PERSONALES -->
 <div id="pg-finanzas" class="pg">
   <div class="ptitle">Finanzas personales</div>
   <div class="psub">Tarjetas, préstamos y sueldo del emprendedor</div>
-
+ 
   <!-- KPIs -->
   <div class="kgrid">
     <div class="kpi rd"><div class="kpi-l">Total compromisos/mes</div><div class="kpi-v" id="fn-total">$0</div></div>
@@ -471,7 +471,7 @@ td strong{color:var(--text);font-weight:500;}
     <div class="kpi"><div class="kpi-l">Pendiente de pagar</div><div class="kpi-v" id="fn-pendiente">$0</div></div>
     <div class="kpi gd"><div class="kpi-l">Sueldo asignado</div><div class="kpi-v" id="fn-sueldo">$0</div></div>
   </div>
-
+ 
   <!-- SUELDO -->
   <div class="slabel">Sueldo del emprendedor</div>
   <div class="card">
@@ -485,7 +485,7 @@ td strong{color:var(--text);font-weight:500;}
       <div class="brow"><button class="btn bp" onclick="guardarSueldo()">Guardar sueldo</button></div>
     </div>
   </div>
-
+ 
   <!-- AGREGAR COMPROMISO -->
   <div class="slabel">Compromisos financieros</div>
   <div class="card">
@@ -507,11 +507,11 @@ td strong{color:var(--text);font-weight:500;}
       <div class="brow"><button class="btn bp" onclick="addCompromiso()">Agregar</button></div>
     </div>
   </div>
-
+ 
   <!-- LISTA COMPROMISOS MES ACTUAL -->
   <div class="slabel" id="fn-mes-label">Compromisos — este mes</div>
   <div id="fn-lista"></div>
-
+ 
   <!-- HISTORIAL PAGOS -->
   <div class="slabel">Historial de pagos recientes</div>
   <div class="card">
@@ -523,25 +523,36 @@ td strong{color:var(--text);font-weight:500;}
     </div>
   </div>
 </div>
-
+ 
 <!-- MOBILE BOTTOM NAV -->
 <div class="bnav">
   <div class="bnav-items">
     <button class="bnav-item on" onclick="nav('dashboard',this)"><span class="bnav-icon">📊</span>Inicio</button>
     <button class="bnav-item" onclick="nav('trabajos',this)"><span class="bnav-icon">🪵</span>Trabajos</button>
     <button class="bnav-item" onclick="nav('cobranzas',this)"><span class="bnav-icon">💰</span>Cobros</button>
-    <button class="bnav-item" onclick="nav('estadisticas',this)"><span class="bnav-icon">📈</span>Stats</button>
-    <button class="bnav-item" onclick="nav('plantillas',this)"><span class="bnav-icon">💬</span>Plantillas</button>
-    <button class="bnav-item" onclick="nav('tareas',this)"><span class="bnav-icon">📋</span>Tareas</button>
+    <button class="bnav-item" onclick="nav('gastos',this)"><span class="bnav-icon">🧾</span>Gastos</button>
+    <button class="bnav-item" onclick="nav('finanzas',this)"><span class="bnav-icon">💳</span>Finanzas</button>
+    <button class="bnav-item" onclick="navMas(this)"><span class="bnav-icon">☰</span>Más</button>
+  </div>
+  <!-- MENÚ MÁS -->
+  <div id="mas-menu" style="display:none;position:fixed;bottom:70px;left:0;right:0;background:rgba(245,237,224,0.98);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:12px;z-index:99;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+      <button class="bnav-item" onclick="navMasItem('estadisticas',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📈</span>Stats</button>
+      <button class="bnav-item" onclick="navMasItem('gastosfijos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📌</span>Fijos</button>
+      <button class="bnav-item" onclick="navMasItem('objetivos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">🎯</span>Objetivos</button>
+      <button class="bnav-item" onclick="navMasItem('presupuestos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📝</span>Presup.</button>
+      <button class="bnav-item" onclick="navMasItem('plantillas',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">💬</span>Plantillas</button>
+      <button class="bnav-item" onclick="navMasItem('tareas',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📋</span>Tareas</button>
+    </div>
   </div>
 </div>
-
-
+ 
+ 
 <!-- TAREAS -->
 <div id="pg-tareas" class="pg">
   <div class="ptitle">Tareas del día</div>
   <div class="psub">Planificá la semana — tildá lo que hiciste</div>
-
+ 
   <!-- SELECTOR DE DÍA -->
   <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap" id="dias-tabs">
     <button class="btn bg2b bsm" style="border-color:var(--gold);color:var(--gold)" onclick="selDia(0,this)">Hoy</button>
@@ -552,7 +563,7 @@ td strong{color:var(--text);font-weight:500;}
     <button class="btn bg2b bsm" onclick="selDia(5,this)">+5 días</button>
     <button class="btn bg2b bsm" onclick="selDia(6,this)">+6 días</button>
   </div>
-
+ 
   <!-- DÍA SELECCIONADO -->
   <div class="card">
     <div class="ch">
@@ -583,17 +594,17 @@ td strong{color:var(--text);font-weight:500;}
       </div>
     </div>
   </div>
-
+ 
   <!-- RESUMEN SEMANA -->
   <div class="slabel">Vista semanal</div>
   <div class="card"><div class="cb" id="semana-vista"></div></div>
 </div>
-
+ 
 <!-- FIREBASE + APP -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
-
+ 
 // ===================================
 // FIREBASE CONFIG
 // ===================================
@@ -605,22 +616,22 @@ const firebaseConfig = {
   messagingSenderId: "936828725897",
   appId: "1:936828725897:web:bce5722f61e315de247458"
 };
-
+ 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
+ 
 // ===================================
 // DATOS INICIALES (60 trabajos + cobros)
 // ===================================
 const TI=[{id:"t1000",cliente:"Oyola Paula",localidad:"Rio Cuarto",desc:"Tapa mesa laurel 2.2x1.2",tipo:"mueble",fecha:"2025-01-06",precio:610000,costo:275000,anticipo:610000,tercero:"",estado:"entregado",ganancia:335000},{id:"t2000",cliente:"Girardi Daiana",localidad:"Rio Cuarto",desc:"5 tablas 20x30 laurel",tipo:"tabla",fecha:"2026-01-12",precio:75000,costo:9900,anticipo:75000,tercero:"",estado:"entregado",ganancia:65100},{id:"t3000",cliente:"Cervino Jose",localidad:"Gral.Cabrera",desc:"Mesa laurel - hierro",tipo:"mueble",fecha:"2026-01-13",precio:765000,costo:0,anticipo:765000,tercero:"",estado:"entregado",ganancia:765000},{id:"t4000",cliente:"Ottani Julieta",localidad:"Las Higueras",desc:"Placard Melamina",tipo:"mueble",fecha:"2026-01-13",precio:930000,costo:510000,anticipo:930000,tercero:"",estado:"entregado",ganancia:420000},{id:"t5000",cliente:"Giaccone Liliana",localidad:"Gral.Cabrera",desc:"Espejo",tipo:"mueble",fecha:"2026-01-13",precio:117000,costo:20000,anticipo:117000,tercero:"",estado:"entregado",ganancia:97000},{id:"t6000",cliente:"Giaccone Liliana",localidad:"Gral.Cabrera",desc:"Divisorio",tipo:"mueble",fecha:"2026-01-13",precio:167000,costo:30000,anticipo:167000,tercero:"",estado:"entregado",ganancia:137000},{id:"t7000",cliente:"Toledo Abel",localidad:"Gral.Cabrera",desc:"Tabla fuente Oliva",tipo:"tabla",fecha:"2026-01-13",precio:44000,costo:10000,anticipo:44000,tercero:"",estado:"entregado",ganancia:34000},{id:"t8000",cliente:"Perez Sebastian",localidad:"Gral.Cabrera",desc:"Mesa guayubira 1,3x1,3",tipo:"mueble",fecha:"2026-01-13",precio:300000,costo:0,anticipo:300000,tercero:"",estado:"entregado",ganancia:300000},{id:"t9000",cliente:"Marchetti Sofia",localidad:"Rio Cuarto",desc:"Colocacion cortina",tipo:"mueble",fecha:"2026-01-15",precio:30000,costo:0,anticipo:30000,tercero:"",estado:"entregado",ganancia:30000},{id:"t10000",cliente:"Trampus Antonella",localidad:"Rio Cuarto",desc:"cortes en laurel",tipo:"mueble",fecha:"2026-01-18",precio:211000,costo:100000,anticipo:211000,tercero:"",estado:"entregado",ganancia:111000},{id:"t11000",cliente:"Monti Martin",localidad:"Gral.Cabrera",desc:"repiza",tipo:"mueble",fecha:"2026-01-21",precio:25000,costo:1500,anticipo:25000,tercero:"",estado:"entregado",ganancia:23500},{id:"t12000",cliente:"Oyola Paula",localidad:"Rio Cuarto",desc:"barra exterior y cajon",tipo:"mueble",fecha:"2026-01-22",precio:387000,costo:70000,anticipo:387000,tercero:"",estado:"entregado",ganancia:317000},{id:"t13000",cliente:"Mellano Ariel",localidad:"Rio Cuarto",desc:"tapa mesa tambor",tipo:"mueble",fecha:"2026-01-26",precio:60000,costo:10000,anticipo:60000,tercero:"",estado:"entregado",ganancia:50000},{id:"t14000",cliente:"Foglias Matias",localidad:"Rio Cuarto",desc:"Madera desayunador",tipo:"mueble",fecha:"2026-01-29",precio:75000,costo:17000,anticipo:75000,tercero:"",estado:"entregado",ganancia:58000},{id:"t15000",cliente:"Alaniz Marcelo",localidad:"Rio Cuarto",desc:"Vinoteca",tipo:"mueble",fecha:"2026-02-05",precio:1080000,costo:0,anticipo:1080000,tercero:"",estado:"entregado",ganancia:1080000},{id:"t16000",cliente:"Marchetti Sofia",localidad:"Rio Cuarto",desc:"Grabado cuero",tipo:"mueble",fecha:"2026-02-18",precio:5000,costo:0,anticipo:5000,tercero:"",estado:"entregado",ganancia:5000},{id:"t17000",cliente:"Gabi Moyano",localidad:"Gral.Cabrera",desc:"10 tablas - 1 tabla",tipo:"tabla",fecha:"2026-02-18",precio:255000,costo:50000,anticipo:255000,tercero:"",estado:"entregado",ganancia:205000},{id:"t18000",cliente:"Wilson San Basilio",localidad:"San Basilio",desc:"1 tabla guayubira",tipo:"tabla",fecha:"2026-03-02",precio:30000,costo:5000,anticipo:30000,tercero:"",estado:"en_produccion",ganancia:25000},{id:"t19000",cliente:"Alaniz Marcelo",localidad:"Rio Cuarto",desc:"Puerta restauracion",tipo:"restauracion",fecha:"2026-03-02",precio:380000,costo:30000,anticipo:380000,tercero:"",estado:"en_produccion",ganancia:350000},{id:"t20000",cliente:"Mellano Ariel",localidad:"Rio Cuarto",desc:"Patas mesita",tipo:"mueble",fecha:"2026-03-02",precio:40000,costo:10000,anticipo:40000,tercero:"",estado:"en_produccion",ganancia:30000},{id:"t21000",cliente:"Carnes Javier",localidad:"Rio Cuarto",desc:"2 tablas individuales",tipo:"tabla",fecha:"2026-03-04",precio:14000,costo:3000,anticipo:14000,tercero:"",estado:"entregado",ganancia:11000},{id:"t22000",cliente:"Lara Borgognone",localidad:"Rio Cuarto",desc:"tabla olivo + set",tipo:"tabla",fecha:"2026-03-04",precio:41000,costo:15000,anticipo:41000,tercero:"",estado:"entregado",ganancia:26000},{id:"t23000",cliente:"Alaniz Marcelo",localidad:"Rio Cuarto",desc:"cucha perro",tipo:"mueble",fecha:"2026-03-04",precio:50000,costo:10000,anticipo:50000,tercero:"",estado:"entregado",ganancia:40000},{id:"t24000",cliente:"Gabi Moyano",localidad:"Gral.Cabrera",desc:"tablas varias",tipo:"tabla",fecha:"2026-03-12",precio:455000,costo:100000,anticipo:455000,tercero:"",estado:"en_produccion",ganancia:355000},{id:"t25000",cliente:"Fernandez Luca",localidad:"Las Higueras",desc:"madera guayubira",tipo:"mueble",fecha:"2026-03-25",precio:60000,costo:23100,anticipo:60000,tercero:"",estado:"entregado",ganancia:36900},{id:"t26000",cliente:"Orellana Diego",localidad:"Cordoba",desc:"5 tablas 20x30 acacia",tipo:"tabla",fecha:"2026-03-25",precio:27500,costo:16500,anticipo:27500,tercero:"",estado:"en_produccion",ganancia:11000},{id:"t27000",cliente:"Nessutta Ornella",localidad:"Rio Cuarto",desc:"2 tablas XL fresno y euca",tipo:"tabla",fecha:"2026-03-25",precio:86000,costo:23100,anticipo:86000,tercero:"",estado:"en_produccion",ganancia:62900},{id:"t28000",cliente:"Lerda Eitel",localidad:"Rio Cuarto",desc:"1 tabla fresno 40x70",tipo:"tabla",fecha:"2026-03-25",precio:40000,costo:12320,anticipo:40000,tercero:"",estado:"entregado",ganancia:27680},{id:"t29000",cliente:"Lerda Eitel",localidad:"Rio Cuarto",desc:"Tapa mesa pino 3,5x1,2",tipo:"mueble",fecha:"2026-03-26",precio:730000,costo:300000,anticipo:656000,tercero:"",estado:"en_produccion",ganancia:430000},{id:"t30000",cliente:"Cocco Dario",localidad:"Rio Cuarto",desc:"Restaurar barra y banquetas",tipo:"restauracion",fecha:"2026-03-26",precio:350000,costo:50000,anticipo:350000,tercero:"",estado:"entregado",ganancia:300000},{id:"t31000",cliente:"Arias Lara",localidad:"Rio Cuarto",desc:"Mesada euca",tipo:"mesada",fecha:"2026-03-26",precio:220000,costo:52800,anticipo:220000,tercero:"",estado:"entregado",ganancia:167200},{id:"t32000",cliente:"Coniglio Diego",localidad:"Rio Cuarto",desc:"18 Tablas guayubira cavadas",tipo:"tabla",fecha:"2026-03-31",precio:360000,costo:71280,anticipo:360000,tercero:"",estado:"entregado",ganancia:288720},{id:"t33000",cliente:"Sandra Bohemian",localidad:"Rio Cuarto",desc:"vanitory guayubira",tipo:"mueble",fecha:"2026-04-01",precio:367000,costo:29700,anticipo:367000,tercero:"",estado:"entregado",ganancia:337300},{id:"t34000",cliente:"Stella Plaza",localidad:"Gral.Cabrera",desc:"Tabla y cuchillo guayubira",tipo:"tabla",fecha:"2026-04-05",precio:40000,costo:20000,anticipo:40000,tercero:"",estado:"entregado",ganancia:20000},{id:"t35000",cliente:"Marchetti Sofia",localidad:"Rio Cuarto",desc:"Mueble bajo barra",tipo:"mueble",fecha:"2026-04-06",precio:1435000,costo:500000,anticipo:717000,tercero:"",estado:"en_produccion",ganancia:935000},{id:"t36000",cliente:"Javier Carnes",localidad:"Rio Cuarto",desc:"2 tablas individuales 20x30",tipo:"tabla",fecha:"2026-04-10",precio:12000,costo:3960,anticipo:12000,tercero:"",estado:"entregado",ganancia:8040},{id:"t37000",cliente:"Melisa Manel",localidad:"Rio Cuarto",desc:"1 set cubiertos",tipo:"mueble",fecha:"2026-04-13",precio:27000,costo:15000,anticipo:27000,tercero:"",estado:"entregado",ganancia:12000},{id:"t38000",cliente:"Cuello Walter",localidad:"Rio Cuarto",desc:"2 set premium guayubira",tipo:"mueble",fecha:"2026-04-17",precio:100000,costo:44000,anticipo:100000,tercero:"",estado:"entregado",ganancia:56000},{id:"t39000",cliente:"Sofia Carpintero",localidad:"Rio Cuarto",desc:"2 troncos pino diam 40",tipo:"mueble",fecha:"2026-04-26",precio:96000,costo:10000,anticipo:96000,tercero:"",estado:"en_produccion",ganancia:86000},{id:"t40000",cliente:"Monti Martin",localidad:"Gral.Cabrera",desc:"Barra pinotea",tipo:"mueble",fecha:"2025-04-28",precio:440000,costo:70000,anticipo:440000,tercero:"",estado:"en_produccion",ganancia:370000},{id:"t41000",cliente:"Tallone Vick",localidad:"Gra.Deheza",desc:"madera fresno",tipo:"mueble",fecha:"2026-04-28",precio:34000,costo:6600,anticipo:34000,tercero:"",estado:"entregado",ganancia:27400},{id:"t42000",cliente:"Moyano Gabi",localidad:"Gral.Cabrera",desc:"1 tabla euca",tipo:"tabla",fecha:"2026-04-28",precio:70000,costo:4620,anticipo:70000,tercero:"",estado:"entregado",ganancia:65380},{id:"t43000",cliente:"Moyano Gabi",localidad:"Gral.Cabrera",desc:"15 tablas euca 20x30",tipo:"tabla",fecha:"2026-04-28",precio:67500,costo:19800,anticipo:67500,tercero:"",estado:"entregado",ganancia:47700},{id:"t44000",cliente:"Alicia Huerta",localidad:"Rio Cuarto",desc:"tabla euca 35x25",tipo:"tabla",fecha:"2026-05-04",precio:15000,costo:3800,anticipo:15000,tercero:"",estado:"entregado",ganancia:11200},{id:"t45000",cliente:"Foglia Matias",localidad:"Rio Cuarto",desc:"2 muelitas",tipo:"mueble",fecha:"2026-05-04",precio:90000,costo:10000,anticipo:90000,tercero:"",estado:"entregado",ganancia:80000},{id:"t46000",cliente:"Carnes Javier",localidad:"Rio Cuarto",desc:"Set Raiz 003",tipo:"mueble",fecha:"2026-05-06",precio:140000,costo:43000,anticipo:140000,tercero:"",estado:"entregado",ganancia:97000},{id:"t47000",cliente:"Rodriguez Mauricio",localidad:"Rio Cuarto",desc:"set premium guayubira",tipo:"mueble",fecha:"2026-05-06",precio:50000,costo:20000,anticipo:0,tercero:"",estado:"en_produccion",ganancia:30000},{id:"t48000",cliente:"Zarates Angel",localidad:"Rio Cuarto",desc:"tabla euca 75x25",tipo:"tabla",fecha:"2026-05-06",precio:41000,costo:8250,anticipo:41000,tercero:"",estado:"entregado",ganancia:32750},{id:"t49000",cliente:"Bianchini Carina",localidad:"Cordoba",desc:"Set Raiz 005",tipo:"mueble",fecha:"2026-05-07",precio:140000,costo:43000,anticipo:140000,tercero:"",estado:"entregado",ganancia:97000},{id:"t50000",cliente:"Oviedo Julieta",localidad:"Rio Cuarto",desc:"Mesada lavadero Euca con bacha",tipo:"mesada",fecha:"2026-05-07",precio:337000,costo:180000,anticipo:337000,tercero:"",estado:"en_produccion",ganancia:157000},{id:"t51000",cliente:"Alicia Huerta",localidad:"Rio Cuarto",desc:"Banco pie de cama laurel",tipo:"mueble",fecha:"2026-05-08",precio:267000,costo:52800,anticipo:267000,tercero:"",estado:"entregado",ganancia:214200},{id:"t52000",cliente:"Giaccone Liliana",localidad:"Gral.Cabrera",desc:"Estante melamina",tipo:"mueble",fecha:"2026-05-13",precio:243000,costo:135000,anticipo:243000,tercero:"",estado:"entregado",ganancia:108000},{id:"t53000",cliente:"Knispel Jorge",localidad:"Rio Cuarto",desc:"cartel tallado",tipo:"mueble",fecha:"2026-05-13",precio:150000,costo:20000,anticipo:0,tercero:"",estado:"en_produccion",ganancia:130000},{id:"t54000",cliente:"Stella Plaza",localidad:"Gral.Cabrera",desc:"tabla + cuchillo",tipo:"tabla",fecha:"2026-05-13",precio:30000,costo:15000,anticipo:30000,tercero:"",estado:"entregado",ganancia:15000},{id:"t55000",cliente:"Rojo Eliana",localidad:"Gral.Cabrera",desc:"tapa mesa pinotea y restauracion",tipo:"restauracion",fecha:"2026-05-14",precio:1037000,costo:250000,anticipo:518500,tercero:"",estado:"en_produccion",ganancia:787000},{id:"t56000",cliente:"Fontana Hernan",localidad:"Villa Mercedes",desc:"set provo + set raiz",tipo:"mueble",fecha:"2026-05-14",precio:225000,costo:80000,anticipo:225000,tercero:"",estado:"entregado",ganancia:145000},{id:"t57000",cliente:"Gabi Moyano",localidad:"Gral.Cabrera",desc:"20 tablas 20x30 euca",tipo:"tabla",fecha:"2026-05-18",precio:92000,costo:33000,anticipo:92000,tercero:"",estado:"entregado",ganancia:59000},{id:"t58000",cliente:"Gabi Moyano",localidad:"Gral.Cabrera",desc:"10 tablas 20x35 con ensalad",tipo:"tabla",fecha:"2026-05-18",precio:71000,costo:16500,anticipo:0,tercero:"",estado:"en_produccion",ganancia:54500},{id:"t59000",cliente:"Foglia Matias",localidad:"Rio Cuarto",desc:"Dibujo de plano",tipo:"mueble",fecha:"2026-05-18",precio:75000,costo:0,anticipo:0,tercero:"",estado:"en_produccion",ganancia:75000},{id:"t60000",cliente:"Cocco Dario",localidad:"Rio Cuarto",desc:"4 set raiz",tipo:"mueble",fecha:"2026-05-21",precio:560000,costo:172000,anticipo:0,tercero:"",estado:"en_produccion",ganancia:388000}];
-
+ 
 const CI=[{id:"c001",trabajoId:"t9000",cliente:"Marchetti Sofia",fecha:"2026-01-16",monto:30000,forma:"efectivo"},{id:"c002",trabajoId:"t3000",cliente:"Cervino Jose",fecha:"2026-01-17",monto:765000,forma:"efectivo"},{id:"c003",trabajoId:"t2000",cliente:"Girardi Daiana",fecha:"2026-01-17",monto:75000,forma:"efectivo"},{id:"c004",trabajoId:"t10000",cliente:"Trampus Antonella",fecha:"2026-01-17",monto:100000,forma:"efectivo"},{id:"c005",trabajoId:"t11000",cliente:"Monti Martin",fecha:"2026-01-21",monto:25000,forma:"efectivo"},{id:"c006",trabajoId:"t1000",cliente:"Oyola Paula",fecha:"2026-01-21",monto:610000,forma:"efectivo"},{id:"c007",trabajoId:"t4000",cliente:"Ottani Julieta",fecha:"2026-01-21",monto:930000,forma:"efectivo"},{id:"c008",trabajoId:"t7000",cliente:"Toledo Abel",fecha:"2026-01-21",monto:44000,forma:"efectivo"},{id:"c009",trabajoId:"t10000",cliente:"Trampus Antonella",fecha:"2026-01-21",monto:111000,forma:"efectivo"},{id:"c010",trabajoId:"t8000",cliente:"Perez Sebastian",fecha:"2026-01-26",monto:150000,forma:"efectivo"},{id:"c011",trabajoId:"t14000",cliente:"Foglias Matias",fecha:"2026-01-29",monto:75000,forma:"efectivo"},{id:"c012",trabajoId:"t12000",cliente:"Oyola Paula",fecha:"2026-01-30",monto:387000,forma:"efectivo"},{id:"c013",trabajoId:"t8000",cliente:"Perez Sebastian",fecha:"2026-02-05",monto:150000,forma:"efectivo"},{id:"c014",trabajoId:"t5000",cliente:"Giaccone Liliana",fecha:"2026-02-11",monto:117000,forma:"efectivo"},{id:"c015",trabajoId:"t6000",cliente:"Giaccone Liliana",fecha:"2026-02-11",monto:167000,forma:"efectivo"},{id:"c016",trabajoId:"t13000",cliente:"Mellano Ariel",fecha:"2026-02-17",monto:60000,forma:"efectivo"},{id:"c017",trabajoId:"t16000",cliente:"Marchetti Sofia",fecha:"2026-02-18",monto:5000,forma:"efectivo"},{id:"c018",trabajoId:"t17000",cliente:"Gabi Moyano",fecha:"2026-02-19",monto:255000,forma:"efectivo"},{id:"c019",trabajoId:"t15000",cliente:"Alaniz Marcelo",fecha:"2026-02-26",monto:1080000,forma:"efectivo"},{id:"c020",trabajoId:"t22000",cliente:"Lara Borgognone",fecha:"2026-03-04",monto:41000,forma:"efectivo"},{id:"c021",trabajoId:"t18000",cliente:"Wilson San Basilio",fecha:"2026-03-04",monto:30000,forma:"efectivo"},{id:"c022",trabajoId:"t21000",cliente:"Carnes Javier",fecha:"2026-03-05",monto:14000,forma:"efectivo"},{id:"c023",trabajoId:"t19000",cliente:"Alaniz Marcelo",fecha:"2026-03-12",monto:380000,forma:"efectivo"},{id:"c024",trabajoId:"t24000",cliente:"Gabi Moyano",fecha:"2026-03-12",monto:250000,forma:"efectivo"},{id:"c025",trabajoId:"t27000",cliente:"Nessutta Ornella",fecha:"2026-03-25",monto:40000,forma:"efectivo"},{id:"c026",trabajoId:"t25000",cliente:"Fernandez Luca",fecha:"2026-03-25",monto:60000,forma:"efectivo"},{id:"c027",trabajoId:"t28000",cliente:"Lerda Eitel",fecha:"2026-03-26",monto:40000,forma:"efectivo"},{id:"c028",trabajoId:"t27000",cliente:"Nessutta Ornella",fecha:"2026-03-26",monto:46000,forma:"efectivo"},{id:"c029",trabajoId:"t23000",cliente:"Alaniz Marcelo",fecha:"2026-03-30",monto:50000,forma:"efectivo"},{id:"c030",trabajoId:"t26000",cliente:"Orellana Diego",fecha:"2026-03-30",monto:27500,forma:"efectivo"},{id:"c031",trabajoId:"t30000",cliente:"Cocco Dario",fecha:"2026-03-30",monto:350000,forma:"efectivo"},{id:"c032",trabajoId:"t32000",cliente:"Coniglio Diego",fecha:"2026-03-30",monto:360000,forma:"efectivo"},{id:"c033",trabajoId:"t34000",cliente:"Stella Plaza",fecha:"2026-04-05",monto:40000,forma:"efectivo"},{id:"c034",trabajoId:"t35000",cliente:"Marchetti Sofia",fecha:"2026-04-06",monto:717000,forma:"efectivo"},{id:"c035",trabajoId:"t31000",cliente:"Arias Lara",fecha:"2026-04-06",monto:100000,forma:"efectivo"},{id:"c036",trabajoId:"t37000",cliente:"Melisa Manel",fecha:"2026-04-13",monto:27000,forma:"efectivo"},{id:"c037",trabajoId:"t33000",cliente:"Sandra Bohemian",fecha:"2026-04-15",monto:367000,forma:"efectivo"},{id:"c038",trabajoId:"t36000",cliente:"Javier Carnes",fecha:"2026-04-17",monto:12000,forma:"efectivo"},{id:"c039",trabajoId:"t38000",cliente:"Cuello Walter",fecha:"2026-04-17",monto:100000,forma:"efectivo"},{id:"c040",trabajoId:"t31000",cliente:"Arias Lara",fecha:"2026-04-20",monto:120000,forma:"efectivo"},{id:"c041",trabajoId:"t29000",cliente:"Lerda Eitel",fecha:"2026-04-22",monto:230000,forma:"efectivo"},{id:"c042",trabajoId:"t41000",cliente:"Tallone Vick",fecha:"2026-04-28",monto:34000,forma:"efectivo"},{id:"c043",trabajoId:"t39000",cliente:"Sofia Carpintero",fecha:"2026-04-28",monto:24000,forma:"efectivo"},{id:"c044",trabajoId:"t24000",cliente:"Gabi Moyano",fecha:"2026-04-30",monto:205000,forma:"efectivo"},{id:"c045",trabajoId:"t43000",cliente:"Moyano Gabi",fecha:"2026-04-30",monto:67500,forma:"efectivo"},{id:"c046",trabajoId:"t39000",cliente:"Sofia Carpintero",fecha:"2026-04-30",monto:72000,forma:"efectivo"},{id:"c047",trabajoId:"t48000",cliente:"Zarates Angel",fecha:"2026-05-06",monto:20500,forma:"efectivo"},{id:"c048",trabajoId:"t45000",cliente:"Foglia Matias",fecha:"2026-05-07",monto:90000,forma:"efectivo"},{id:"c049",trabajoId:"t46000",cliente:"Carnes Javier",fecha:"2026-05-07",monto:140000,forma:"efectivo"},{id:"c050",trabajoId:"t49000",cliente:"Bianchini Carina",fecha:"2026-05-07",monto:140000,forma:"efectivo"},{id:"c051",trabajoId:"t50000",cliente:"Oviedo Julieta",fecha:"2026-05-07",monto:168500,forma:"efectivo"},{id:"c052",trabajoId:"t44000",cliente:"Alicia Huerta",fecha:"2026-05-08",monto:15000,forma:"efectivo"},{id:"c053",trabajoId:"t51000",cliente:"Alicia Huerta",fecha:"2026-05-11",monto:100000,forma:"efectivo"},{id:"c054",trabajoId:"t48000",cliente:"Zarates Angel",fecha:"2026-05-12",monto:20500,forma:"efectivo"},{id:"c055",trabajoId:"t42000",cliente:"Moyano Gabi",fecha:"2026-05-13",monto:70000,forma:"efectivo"},{id:"c056",trabajoId:"t54000",cliente:"Stella Plaza",fecha:"2026-05-14",monto:30000,forma:"efectivo"},{id:"c057",trabajoId:"t51000",cliente:"Alicia Huerta",fecha:"2026-05-14",monto:67000,forma:"efectivo"},{id:"c058",trabajoId:"t55000",cliente:"Rojo Eliana",fecha:"2026-05-14",monto:518500,forma:"efectivo"},{id:"c059",trabajoId:"t29000",cliente:"Lerda Eitel",fecha:"2026-05-16",monto:426000,forma:"efectivo"},{id:"c060",trabajoId:"t56000",cliente:"Fontana Hernan",fecha:"2026-05-16",monto:225000,forma:"efectivo"},{id:"c061",trabajoId:"t50000",cliente:"Oviedo Julieta",fecha:"2026-05-18",monto:168500,forma:"efectivo"},{id:"c062",trabajoId:"t57000",cliente:"Gabi Moyano",fecha:"2026-05-20",monto:92000,forma:"efectivo"},{id:"c063",trabajoId:"t52000",cliente:"Giaccone Liliana",fecha:"2026-05-20",monto:243000,forma:"efectivo"}];
-
+ 
 const GF_INICIALES = [
   {id:"gf1", desc:"Gasto taller", monto:400000, cat:"alquiler"},
   {id:"gf2", desc:"Gasto personal", monto:2000000, cat:"personal"}
 ];
-
+ 
 // ===================================
 // STATE
 // ===================================
@@ -632,7 +643,7 @@ let FA='todos';
 const TIPOS={tabla:'Tabla',mueble:'Mueble',mesada:'Mesada',restauracion:'Restauración',catalogo:'Catálogo',otro:'Otro'};
 const COLORS={mueble:'#c9a84c',tabla:'#7ab87a',mesada:'#7a9ac4',restauracion:'#d4a060',catalogo:'#a87ab8',otro:'#6b6458'};
 const MNAMES={'01':'Ene','02':'Feb','03':'Mar','04':'Abr','05':'May','06':'Jun','07':'Jul','08':'Ago','09':'Sep','10':'Oct','11':'Nov','12':'Dic'};
-
+ 
 // ===================================
 // UTILS
 // ===================================
@@ -642,7 +653,7 @@ const today=()=>new Date().toISOString().split('T')[0];
 const mes=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');};
 const dSince=s=>s?Math.floor((new Date()-new Date(s))/86400000):0;
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
-
+ 
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500);}
 function setSyncStatus(status){
   const states={ok:{color:'#7ab87a',text:'guardado'},syncing:{color:'#d4a060',text:'guardando...'},error:{color:'#c47a7a',text:'error'}};
@@ -650,7 +661,7 @@ function setSyncStatus(status){
   ['sync-dot','sync-dot-m','save-dot'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.background=s.color;});
   ['sync-text','sync-text-m','save-txt'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=s.text;});
 }
-
+ 
 // ===================================
 // FIREBASE CRUD
 // ===================================
@@ -668,7 +679,7 @@ async function fbGetAll(col){
   const snap = await getDocs(collection(db,col));
   return snap.docs.map(d=>({...d.data(),id:d.id}));
 }
-
+ 
 // ===================================
 // INIT - cargar o sembrar datos
 // ===================================
@@ -678,7 +689,7 @@ async function init(){
     console.warn('Firebase timeout - cargando sin datos');
     resolve('timeout');
   }, 8000));
-
+ 
   try {
     const result = await Promise.race([
       initFirebase(),
@@ -709,7 +720,7 @@ async function init(){
       console.error('Firebase error completo:', e);
   }
 }
-
+ 
 async function initFirebase(){
   // Verificar si ya hay datos
   const snap = await getDocs(collection(db,'trabajos'));
@@ -721,7 +732,7 @@ async function initFirebase(){
     await setDoc(doc(db,'config','main'),{deudaBancaria:2000000,inicializado:true});
     toast('✓ Datos cargados');
   }
-
+ 
   // Cargar todo
   trabajos = await fbGetAll('trabajos');
   cobros = await fbGetAll('cobros');
@@ -730,18 +741,18 @@ async function initFirebase(){
   presupuestos = await fbGetAll('presupuestos');
   compromisos = await fbGetAll('compromisos');
   pagosFin = await fbGetAll('pagosFin');
-
+ 
   // Config
   const cfg = await getDoc(doc(db,'config','main'));
   if(cfg.exists()){
     deudaBancaria = cfg.data().deudaBancaria || 2000000;
     sueldoMensual = cfg.data().sueldoMensual || 0;
   }
-
+ 
   setSyncStatus('ok');
   renderAll();
   hideSplash();
-
+ 
   // Escuchar cambios en tiempo real
   onSnapshot(collection(db,'trabajos'), snap=>{ trabajos=snap.docs.map(d=>({...d.data(),id:d.id})); renderAll(); });
   onSnapshot(collection(db,'cobros'), snap=>{ cobros=snap.docs.map(d=>({...d.data(),id:d.id})); renderAll(); });
@@ -751,9 +762,9 @@ async function initFirebase(){
   onSnapshot(collection(db,'compromisos'), snap=>{ compromisos=snap.docs.map(d=>({...d.data(),id:d.id})); renderFinanzas(); });
   onSnapshot(collection(db,'pagosFin'), snap=>{ pagosFin=snap.docs.map(d=>({...d.data(),id:d.id})); renderFinanzas(); });
 }
-
+ 
 function hideSplash(){ setTimeout(()=>document.getElementById('splash').classList.add('hide'),500); }
-
+ 
 // ===================================
 // NAV
 // ===================================
@@ -766,7 +777,26 @@ window.nav = function(id,btn){
   document.querySelectorAll(`.tab[onclick*="'${id}'"],.bnav-item[onclick*="'${id}'"]`).forEach(b=>b.classList.add('on'));
   renderAll();
 };
-
+ 
+window.navMas = function(btn){
+  const menu = document.getElementById('mas-menu');
+  const visible = menu.style.display === 'flex';
+  menu.style.display = visible ? 'none' : 'flex';
+  menu.style.flexDirection = 'column';
+};
+ 
+window.navMasItem = function(id, btn){
+  document.getElementById('mas-menu').style.display = 'none';
+  nav(id, btn);
+};
+ 
+document.addEventListener('click', function(e){
+  const menu = document.getElementById('mas-menu');
+  if(menu && menu.style.display==='flex' && !e.target.closest('#mas-menu') && !e.target.closest('.bnav-item')){
+    menu.style.display='none';
+  }
+});
+ 
 // ===================================
 // TRABAJOS
 // ===================================
@@ -811,7 +841,7 @@ function renderT(f='todos'){
 }
 window.filtT=function(f,btn){document.querySelectorAll('#fw .btn').forEach(b=>{b.style.borderColor='';b.style.color='';});btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';renderT(f);};
 window.delT=async function(id){if(!confirm('¿Eliminás este trabajo?'))return;await fbDel('trabajos',id);toast('Eliminado');};
-
+ 
 // ===================================
 // PRESUPUESTOS
 // ===================================
@@ -834,7 +864,7 @@ function renderP(){
   }).join('');
 }
 window.chgPres=async function(id,est){const p=presupuestos.find(x=>x.id===id);if(p){p.estado=est;await fbSet('presupuestos',id,p);}};
-
+ 
 // ===================================
 // COBRANZAS
 // ===================================
@@ -864,7 +894,7 @@ function renderC(){
   document.getElementById('c-mes').textContent=fmt(mesCob);document.getElementById('c-ntr').textContent=mesCobs.length;
 }
 window.delC=async function(id){await fbDel('cobros',id);toast('Eliminado');};
-
+ 
 // ===================================
 // GASTOS
 // ===================================
@@ -888,7 +918,7 @@ function renderG(){
   tb.innerHTML=[...gastos].sort((a,b)=>b.fecha?.localeCompare(a.fecha)).map(g=>`<tr><td><strong>${g.desc}</strong></td><td><span class="bx bx-gy">${CATS[g.cat]||g.cat}</span></td><td>${g.fecha}</td><td class="r" style="color:#c47a7a">${fmt(g.monto)}</td><td><button class="btn bdr bsm" onclick="delG('${g.id}')">✕</button></td></tr>`).join('');
 }
 window.delG=async function(id){await fbDel('gastos',id);toast('Eliminado');};
-
+ 
 // ===================================
 // GASTOS FIJOS
 // ===================================
@@ -920,7 +950,7 @@ window.actualizarDeuda=async function(){
   document.getElementById('deuda-input').value='';
   toast('Deuda bancaria actualizada ✓');
 };
-
+ 
 // ===================================
 // ESTADÍSTICAS
 // ===================================
@@ -957,7 +987,7 @@ function renderStats(){
   document.getElementById('e-gantot').textContent=fmtK(totGan);document.getElementById('e-factot').textContent=fmtK(totF);
   document.getElementById('e-ticket').textContent=fmtK(Math.round(totF/nT));document.getElementById('e-margen').textContent=(totF>0?Math.round(totGan/totF*100):0)+'%';
 }
-
+ 
 // ===================================
 // DASHBOARD
 // ===================================
@@ -994,7 +1024,7 @@ function renderDash(){
   if(document.getElementById('o-gan'))document.getElementById('o-gan').textContent=fmt(ganM);
   document.getElementById('dash-sub').textContent='Plumanegra · '+hoy.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
 }
-
+ 
 // ===================================
 // OBJETIVOS
 // ===================================
@@ -1015,7 +1045,7 @@ function renderObjetivos(){
   </div>`).join('');
 }
 window.updObj=function(n,v){document.getElementById('op'+n).textContent=v+'%';document.getElementById('ob'+n).style.width=v+'%';};
-
+ 
 // ===================================
 // PLANTILLAS
 // ===================================
@@ -1042,17 +1072,17 @@ function renderPlantillas(){
 }
 window.togT=function(c){const tb=c.querySelector('.tb'),btn=c.querySelector('.tcb');const open=c.classList.contains('open');document.querySelectorAll('.tc').forEach(x=>x.classList.remove('open'));if(!open)c.classList.add('open');};
 window.copT=function(e,btn){e.stopPropagation();const tb=btn.previousElementSibling;navigator.clipboard.writeText(tb.textContent.trim()).then(()=>toast('Copiado ✓'));};
-
+ 
 // ===================================
 // FINANZAS PERSONALES
 // ===================================
 const TIPOS_FIN = {tarjeta_credito:'Tarjeta',prestamo:'Préstamo',descubierto:'Descubierto',otro:'Otro'};
-
+ 
 window.prevSueldo = function(){
   const v = +document.getElementById('fn-sue-mon').value||0;
   document.getElementById('fn-sue-prev').textContent = fmt(v)+' / mes';
 };
-
+ 
 window.guardarSueldo = async function(){
   const v = +document.getElementById('fn-sue-mon').value||0;
   if(!v){toast('Ingresá un monto');return;}
@@ -1061,7 +1091,7 @@ window.guardarSueldo = async function(){
   renderFinanzas(); renderGF();
   toast('Sueldo guardado ✓');
 };
-
+ 
 window.addCompromiso = async function(){
   const nom = document.getElementById('fn-nom').value.trim();
   const mon = +document.getElementById('fn-mon').value||0;
@@ -1072,12 +1102,12 @@ window.addCompromiso = async function(){
   document.getElementById('fn-nom').value=''; document.getElementById('fn-mon').value=''; document.getElementById('fn-venc').value='';
   toast('Compromiso agregado ✓');
 };
-
+ 
 window.delCompromiso = async function(id){
   if(!confirm('¿Eliminás este compromiso?'))return;
   await fbDel('compromisos',id); toast('Eliminado');
 };
-
+ 
 window.marcarPagado = async function(compromisoId, nombre, monto){
   const m = mes();
   // Verificar si ya está pagado este mes
@@ -1087,35 +1117,35 @@ window.marcarPagado = async function(compromisoId, nombre, monto){
   await fbSet('pagosFin', id, {id, compromisoId, nombre, monto, mes:m, fecha:today()});
   toast('Marcado como pagado ✓');
 };
-
+ 
 window.desmarcarPagado = async function(pagoId){
   await fbDel('pagosFin', pagoId); toast('Desmarcado');
 };
-
+ 
 function renderFinanzas(){
   const m = mes();
   const totalCompromisos = compromisos.reduce((a,c)=>a+c.monto,0);
   const pagosEsteMes = pagosFin.filter(p=>p.mes===m);
   const totalPagado = pagosEsteMes.reduce((a,p)=>a+p.monto,0);
   const totalPendiente = totalCompromisos - totalPagado;
-
+ 
   // KPIs
   if(document.getElementById('fn-total')) document.getElementById('fn-total').textContent=fmt(totalCompromisos);
   if(document.getElementById('fn-pagado')) document.getElementById('fn-pagado').textContent=fmt(totalPagado);
   if(document.getElementById('fn-pendiente')) document.getElementById('fn-pendiente').textContent=fmt(Math.max(0,totalPendiente));
   if(document.getElementById('fn-sueldo')) document.getElementById('fn-sueldo').textContent=fmt(sueldoMensual);
-
+ 
   // Sueldo input
   if(document.getElementById('fn-sue-mon') && !document.getElementById('fn-sue-mon').value){
     document.getElementById('fn-sue-mon').value = sueldoMensual||'';
     document.getElementById('fn-sue-prev').textContent = fmt(sueldoMensual)+' / mes';
   }
-
+ 
   // Etiqueta mes
   const now = new Date();
   const mesNombre = now.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
   if(document.getElementById('fn-mes-label')) document.getElementById('fn-mes-label').textContent = 'Compromisos — '+mesNombre;
-
+ 
   // Lista compromisos
   const lista = document.getElementById('fn-lista');
   if(!lista) return;
@@ -1143,7 +1173,7 @@ function renderFinanzas(){
       </div>`;
     }).join('');
   }
-
+ 
   // Historial
   const hist = document.getElementById('fn-historial');
   if(!hist) return;
@@ -1159,33 +1189,33 @@ function renderFinanzas(){
     </tr>`).join('');
   }
 }
-
+ 
 // ===================================
 // RENDER ALL
 // ===================================
 function renderAll(){
   renderT(FA);renderP();renderC();renderG();renderGF();renderDash();renderStats();renderObjetivos();renderPlantillas();updSel();renderFinanzas();
 }
-
+ 
 // ===================================
 // SERVICE WORKER
 // ===================================
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
-
-
+ 
+ 
 // ===================================
 // TAREAS
 // ===================================
 let diaSeleccionado = 0; // 0=hoy, 1=mañana, etc.
-
+ 
 function getFechaDia(offset) {
   const d = new Date();
   d.setDate(d.getDate() + offset);
   return d.toISOString().split('T')[0];
 }
-
+ 
 function getNombreDia(offset) {
   const d = new Date();
   d.setDate(d.getDate() + offset);
@@ -1193,14 +1223,14 @@ function getNombreDia(offset) {
   const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   return dias[d.getDay()] + ' ' + d.getDate() + ' ' + meses[d.getMonth()];
 }
-
+ 
 window.selDia = function(offset, btn) {
   diaSeleccionado = offset;
   document.querySelectorAll('#dias-tabs .btn').forEach(b => { b.style.borderColor=''; b.style.color=''; });
   btn.style.borderColor = 'var(--gold)'; btn.style.color = 'var(--gold)';
   renderTareas();
 };
-
+ 
 window.addTarea = async function() {
   const txt = document.getElementById('tarea-txt').value.trim();
   if (!txt) { toast('Escribí una tarea'); return; }
@@ -1211,32 +1241,32 @@ window.addTarea = async function() {
   document.getElementById('tarea-txt').value = '';
   toast('Tarea agregada ✓');
 };
-
+ 
 window.toggleTarea = async function(id, done) {
   const snap = await getDoc(doc(db, 'tareas', id));
   if (snap.exists()) {
     await fbSet('tareas', id, { ...snap.data(), done: !done });
   }
 };
-
+ 
 window.delTarea = async function(id) {
   await fbDel('tareas', id);
   toast('Tarea eliminada');
 };
-
+ 
 function renderTareas() {
   const fecha = getFechaDia(diaSeleccionado);
   const nombre = diaSeleccionado === 0 ? 'Tareas de hoy' : diaSeleccionado === 1 ? 'Tareas de mañana' : 'Tareas del ' + getNombreDia(diaSeleccionado);
   document.getElementById('tareas-titulo').textContent = nombre;
   document.getElementById('tareas-fecha').textContent = getNombreDia(diaSeleccionado);
-
+ 
   // Tareas del día seleccionado
   const tareasDia = (window._tareas || []).filter(t => t.fecha === fecha).sort((a,b) => a.ts - b.ts);
   const total = tareasDia.length;
   const completadas = tareasDia.filter(t => t.done).length;
-
+ 
   const CATS = { taller:'🪵', entrega:'📦', cobro:'💰', compra:'🛒', redes:'📱', admin:'📋', otro:'📌' };
-
+ 
   const el = document.getElementById('tareas-lista');
   if (!tareasDia.length) {
     el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">Sin tareas para este día - agregá una arriba</div>';
@@ -1252,14 +1282,14 @@ function renderTareas() {
       </div>
     `).join('');
   }
-
+ 
   document.getElementById('tareas-resumen').textContent = total + ' tarea' + (total !== 1 ? 's' : '');
   document.getElementById('tareas-completadas').textContent = completadas + ' completada' + (completadas !== 1 ? 's' : '');
-
+ 
   // Vista semanal
   renderSemana();
 }
-
+ 
 function renderSemana() {
   const el = document.getElementById('semana-vista');
   const CATS = { taller:'🪵', entrega:'📦', cobro:'💰', compra:'🛒', redes:'📱', admin:'📋', otro:'📌' };
@@ -1285,7 +1315,7 @@ function renderSemana() {
   }
   el.innerHTML = html;
 }
-
+ 
 // Listener en tiempo real para tareas
 function initTareasListener() {
   onSnapshot(collection(db, 'tareas'), snap => {
@@ -1293,8 +1323,8 @@ function initTareasListener() {
     renderTareas();
   });
 }
-
-
+ 
+ 
 // ===================================
 // EXPORTAR RESUMEN PARA CLAUDE
 // ===================================
@@ -1302,7 +1332,7 @@ window.exportarResumen = function() {
   const hoy = new Date();
   const m = mes();
   const fmt2 = n => '$' + Math.round(n||0).toLocaleString('es-AR');
-
+ 
   // Trabajos en producción
   const enProd = trabajos.filter(t => ['confirmado','en_produccion','terminado'].includes(t.estado));
   
@@ -1319,22 +1349,22 @@ window.exportarResumen = function() {
     const ex = cobros.filter(c => c.trabajoId === t.id).reduce((a,c) => a+c.monto, 0);
     return (t.precio - t.anticipo - ex) > 0 && t.estado !== 'presupuestado';
   });
-
+ 
   // Gastos del mes
   const gasVar = gastos.filter(g => g.fecha && g.fecha.startsWith(m)).reduce((a,g) => a+g.monto, 0);
   const gasFij = gastosFijos.reduce((a,g) => a+g.monto, 0);
-
+ 
   // Presupuestos pendientes
   const presPend = presupuestos.filter(p => p.estado === 'enviado' || p.estado === 'en_negociacion');
-
+ 
   const TIPOS = {tabla:'Tabla',mueble:'Mueble',mesada:'Mesada',restauracion:'Restauración',catalogo:'Catálogo',otro:'Otro'};
   const ESTADOS = {presupuestado:'Presupuestado',confirmado:'Confirmado',en_produccion:'En producción',terminado:'Terminado',entregado:'Entregado'};
-
+ 
   let txt = '';
   txt += '===================================\n';
   txt += 'RESUMEN PLUMANEGRA - ' + hoy.toLocaleDateString('es-AR', {weekday:'long', day:'numeric', month:'long', year:'numeric'}).toUpperCase() + '\n';
   txt += '===================================\n\n';
-
+ 
   txt += '📊 ESTE MES (' + m + ')\n';
   txt += '---------------------------------\n';
   txt += 'Ganancia generada:  ' + fmt2(ganM) + '\n';
@@ -1346,7 +1376,7 @@ window.exportarResumen = function() {
   txt += 'Resultado neto:     ' + fmt2(ganM - gasVar - gasFij - sueldoMensual) + '\n';
   txt += 'Meta mensual:       $8.400.000\n';
   txt += 'Meta diaria:        $336.000\n\n';
-
+ 
   txt += '🪵 TRABAJOS EN PRODUCCIÓN (' + enProd.length + ')\n';
   txt += '---------------------------------\n';
   if (enProd.length === 0) {
@@ -1364,7 +1394,7 @@ window.exportarResumen = function() {
     });
   }
   txt += '\n';
-
+ 
   txt += '💰 SALDOS PENDIENTES DE COBRO\n';
   txt += '---------------------------------\n';
   if (pendientes.length === 0) {
@@ -1382,7 +1412,7 @@ window.exportarResumen = function() {
 `;
   }
   txt += '\n';
-
+ 
   txt += '📋 PRESUPUESTOS ACTIVOS (' + presPend.length + ')\n';
   txt += '---------------------------------\n';
   if (presPend.length === 0) {
@@ -1397,7 +1427,7 @@ window.exportarResumen = function() {
     });
   }
   txt += '\n';
-
+ 
   txt += '💸 GASTOS VARIABLES DEL MES\n';
   txt += '---------------------------------\n';
   const gastosMes = gastos.filter(g => g.fecha && g.fecha.startsWith(m));
@@ -1410,14 +1440,14 @@ window.exportarResumen = function() {
     });
   }
   txt += '\n';
-
+ 
   txt += '🏦 GASTOS FIJOS MENSUALES\n';
   txt += '---------------------------------\n';
   gastosFijos.forEach(g => {
     txt += `• ${g.desc}: ${fmt2(g.monto)}\n`;
   });
   txt += `TOTAL FIJOS: ${fmt2(gasFij)}\n\n`;
-
+ 
   // Finanzas personales
   const pagosDelMes = pagosFin.filter(p=>p.mes===m);
   const totalComp = compromisos.reduce((a,c)=>a+c.monto,0);
@@ -1433,7 +1463,7 @@ window.exportarResumen = function() {
     txt += `• ${c.nombre}: ${fmt2(c.monto)} — ${pago?'✓ PAGADO':'PENDIENTE'}\n`;
   });
   txt += '\n';
-
+ 
   txt += '📈 COBROS RECIENTES (últimos 10)\n';
   txt += '---------------------------------\n';
   const cobRecientes = [...cobros].sort((a,b) => b.fecha?.localeCompare(a.fecha)).slice(0,10);
@@ -1442,11 +1472,11 @@ window.exportarResumen = function() {
 `;
   });
   txt += '\n';
-
+ 
   txt += '===================================\n';
   txt += 'FIN DEL RESUMEN - PLUMANEGRA\n';
   txt += '===================================\n';
-
+ 
   document.getElementById('export-box').textContent = txt;
   document.getElementById('export-box').style.display = 'block';
   document.getElementById('copy-export-btn').style.display = 'inline-block';
@@ -1454,7 +1484,7 @@ window.exportarResumen = function() {
   // Scroll al export
   document.getElementById('export-box').scrollIntoView({behavior:'smooth'});
 };
-
+ 
 window.copyExport = function() {
   const txt = document.getElementById('export-box').textContent;
   navigator.clipboard.writeText(txt).then(() => {
@@ -1465,7 +1495,7 @@ window.copyExport = function() {
     }, 3000);
   });
 };
-
+ 
 // ===================================
 // ARRANCAR
 // ===================================
