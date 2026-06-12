@@ -222,9 +222,8 @@ td strong{color:var(--text);font-weight:500;}
       📋 Copiar todo — pegar en Claude
     </button>
   </div>
-  <div class="slabel">Este mes</div>
-  <div class="kgrid">
-    <div class="kpi gd"><div class="kpi-l">Ganancia del mes</div><div class="kpi-v" id="d-gan">$0</div><div class="kpi-s">meta $5.000.000</div></div>
+  <div id="dash-alertas-fin"></div>
+  <div class="slabel">Este mes</div><div class="kpi-v" id="d-gan">$0</div><div class="kpi-s">meta $5.000.000</div></div>
     <div class="kpi am"><div class="kpi-l">Cobrado este mes</div><div class="kpi-v" id="d-cob">$0</div><div class="kpi-s" id="d-ncob">0 cobros</div></div>
     <div class="kpi"><div class="kpi-l">Facturación</div><div class="kpi-v" id="d-fac">$0</div><div class="kpi-s" id="d-ntrab">0 trabajos</div></div>
     <div class="kpi rd"><div class="kpi-l">Resultado neto</div><div class="kpi-v" id="d-neto">$0</div><div class="kpi-s">gan − gastos</div></div>
@@ -540,6 +539,7 @@ td strong{color:var(--text);font-weight:500;}
 <div id="pg-finanzas" class="pg">
   <div class="ptitle">Finanzas personales</div>
   <div class="psub">Tarjetas, préstamos y sueldo del emprendedor</div>
+  <div id="fin-alertas-glob"></div>
 
   <!-- KPIs -->
   <div class="kgrid">
@@ -619,7 +619,7 @@ td strong{color:var(--text);font-weight:500;}
       <button class="bnav-item" onclick="navMasItem('objetivos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">🎯</span>Objetivos</button>
       <button class="bnav-item" onclick="navMasItem('presupuestos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📝</span>Presup.</button>
       <button class="bnav-item" onclick="navMasItem('gastos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">🧾</span>Gastos</button>
-      <button class="bnav-item" onclick="navMasItem('gastosfijos',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">📋</span>G.Fijos</button>
+      <button class="bnav-item" onclick="navMasItem('tareas',this)" style="padding:10px 4px;background:var(--bg3);border-radius:10px;width:100%"><span class="bnav-icon">✅</span>Tareas</button>
     </div>
   </div>
 </div>
@@ -627,54 +627,70 @@ td strong{color:var(--text);font-weight:500;}
 
 <!-- TAREAS -->
 <div id="pg-tareas" class="pg">
-  <div class="ptitle">Tareas del día</div>
-  <div class="psub">Planificá la semana — tildá lo que hiciste</div>
+  <div class="ptitle">Tareas</div>
+  <div class="psub">Por día, hora y tipo — tildá lo que completaste</div>
 
-  <!-- SELECTOR DE DÍA -->
-  <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap" id="dias-tabs">
-    <button class="btn bg2b bsm" style="border-color:var(--gold);color:var(--gold)" onclick="selDia(0,this)">Hoy</button>
-    <button class="btn bg2b bsm" onclick="selDia(1,this)">Mañana</button>
-    <button class="btn bg2b bsm" onclick="selDia(2,this)">+2 días</button>
-    <button class="btn bg2b bsm" onclick="selDia(3,this)">+3 días</button>
-    <button class="btn bg2b bsm" onclick="selDia(4,this)">+4 días</button>
-    <button class="btn bg2b bsm" onclick="selDia(5,this)">+5 días</button>
-    <button class="btn bg2b bsm" onclick="selDia(6,this)">+6 días</button>
+  <!-- ALERTAS AUTOMÁTICAS -->
+  <div id="tareas-alertas"></div>
+
+  <!-- KPIs -->
+  <div class="kgrid">
+    <div class="kpi rd"><div class="kpi-l">Vencidas sin completar</div><div class="kpi-v" id="tk-venc">0</div></div>
+    <div class="kpi am"><div class="kpi-l">Tareas de hoy</div><div class="kpi-v" id="tk-hoy">0</div></div>
+    <div class="kpi"><div class="kpi-l">Esta semana</div><div class="kpi-v" id="tk-sem">0</div></div>
+    <div class="kpi gd"><div class="kpi-l">Completadas hoy</div><div class="kpi-v" id="tk-comp">0</div></div>
   </div>
 
-  <!-- DÍA SELECCIONADO -->
+  <!-- NUEVA TAREA -->
+  <div class="slabel">Nueva tarea</div>
   <div class="card">
-    <div class="ch">
-      <span class="ct" id="tareas-titulo">Tareas de hoy</span>
-      <span style="font-size:11px;color:var(--text3)" id="tareas-fecha"></span>
-    </div>
     <div class="cb">
-      <!-- AGREGAR TAREA -->
-      <div style="display:flex;gap:8px;margin-bottom:14px">
-        <select id="tarea-cat" style="width:130px;flex-shrink:0">
-          <option value="taller">🪵 Taller</option>
-          <option value="entrega">📦 Entrega</option>
-          <option value="cobro">💰 Cobro</option>
-          <option value="compra">🛒 Compra</option>
-          <option value="redes">📱 Redes</option>
-          <option value="admin">📋 Admin</option>
-          <option value="otro">📌 Otro</option>
-        </select>
-        <input id="tarea-txt" placeholder="Describí la tarea..." style="flex:1" onkeydown="if(event.key==='Enter')addTarea()">
-        <button class="btn bp" onclick="addTarea()" style="flex-shrink:0">+</button>
+      <div class="fg">
+        <div class="fi full"><label>Descripción</label><input id="tk-txt" placeholder="Ej: Llamar a Marchetti para confirmar entrega" onkeydown="if(event.key==='Enter')addTareaNew()"></div>
+        <div class="fi"><label>Tipo</label>
+          <select id="tk-tipo">
+            <option value="llamado">📞 Llamado</option>
+            <option value="cobro">💰 Cobro</option>
+            <option value="entrega">📦 Entrega</option>
+            <option value="compra">🛒 Compra</option>
+            <option value="presupuesto">📝 Presupuesto</option>
+            <option value="taller">🪵 Taller</option>
+            <option value="redes">📱 Redes</option>
+            <option value="admin">📋 Admin</option>
+            <option value="pago">💳 Pago</option>
+            <option value="otro">📌 Otro</option>
+          </select>
+        </div>
+        <div class="fi"><label>Prioridad</label>
+          <select id="tk-prio">
+            <option value="urgente">🔴 Urgente</option>
+            <option value="normal" selected>🟡 Normal</option>
+            <option value="baja">🟢 Baja</option>
+          </select>
+        </div>
+        <div class="fi"><label>Fecha</label><input type="date" id="tk-fecha"></div>
+        <div class="fi"><label>Hora (opcional)</label><input type="time" id="tk-hora" placeholder="09:00"></div>
+        <div class="fi full"><label>Nota (opcional)</label><input id="tk-nota" placeholder="Detalles adicionales..."></div>
       </div>
-      <!-- LISTA DE TAREAS -->
-      <div id="tareas-lista"></div>
-      <!-- RESUMEN -->
-      <div style="margin-top:12px;padding:8px 12px;background:var(--bg3);border-radius:8px;font-size:12px;color:var(--text2);display:flex;justify-content:space-between">
-        <span id="tareas-resumen">0 tareas</span>
-        <span id="tareas-completadas" style="color:#7ab87a">0 completadas</span>
-      </div>
+      <div class="brow"><button class="btn bp" onclick="addTareaNew()">Agregar tarea</button></div>
     </div>
   </div>
 
-  <!-- RESUMEN SEMANA -->
+  <!-- FILTROS -->
+  <div style="display:flex;gap:6px;margin:16px 0 8px;flex-wrap:wrap">
+    <button class="btn bg2b bsm" id="tkf-todas" style="border-color:var(--gold);color:var(--gold)" onclick="filtroTK('todas',this)">Todas</button>
+    <button class="btn bg2b bsm" onclick="filtroTK('hoy',this)">Hoy</button>
+    <button class="btn bg2b bsm" onclick="filtroTK('semana',this)">Esta semana</button>
+    <button class="btn bg2b bsm" onclick="filtroTK('urgente',this)">🔴 Urgentes</button>
+    <button class="btn bg2b bsm" onclick="filtroTK('pendientes',this)">Pendientes</button>
+  </div>
+
+  <!-- LISTA TAREAS -->
+  <div id="tk-lista"></div>
+
+  <!-- VISTA SEMANAL -->
   <div class="slabel">Vista semanal</div>
-  <div class="card"><div class="cb" id="semana-vista"></div></div>
+  <div class="card"><div class="cb" id="tk-semana"></div></div>
 </div>
 
 <!-- FIREBASE + APP -->
@@ -714,7 +730,8 @@ const GF_INICIALES = [
 // ===================================
 let trabajos=[], cobros=[], gastos=[], gastosFijos=[], presupuestos=[];
 let compromisos=[], pagosFin=[];
-let compras=[];
+let compras=[], tareas=[];
+let tkFiltro='todas';
 let deudaBancaria = 2000000;
 let sueldoMensual = 0;
 let FA='todos';
@@ -831,6 +848,7 @@ async function initFirebase(){
   compromisos = await fbGetAll('compromisos');
   pagosFin = await fbGetAll('pagosFin');
   compras = await fbGetAll('compras');
+  tareas = await fbGetAll('tareas');
 
   // Config
   const cfg = await getDoc(doc(db,'config','main'));
@@ -852,6 +870,7 @@ async function initFirebase(){
   onSnapshot(collection(db,'compromisos'), snap=>{ compromisos=snap.docs.map(d=>({...d.data(),id:d.id})); renderFinanzas(); });
   onSnapshot(collection(db,'pagosFin'), snap=>{ pagosFin=snap.docs.map(d=>({...d.data(),id:d.id})); renderFinanzas(); });
   onSnapshot(collection(db,'compras'), snap=>{ compras=snap.docs.map(d=>({...d.data(),id:d.id})); renderCompras(); renderDash(); });
+  onSnapshot(collection(db,'tareas'), snap=>{ tareas=snap.docs.map(d=>({...d.data(),id:d.id})); renderTareas(); renderDash(); });
 }
 
 function hideSplash(){ setTimeout(()=>document.getElementById('splash').classList.add('hide'),500); }
@@ -893,6 +912,7 @@ document.addEventListener('click', function(e){
 // ===================================
 document.getElementById('t-fec').value=today();
 document.getElementById('cp-fecha').value=today();
+if(document.getElementById('tk-fecha')) document.getElementById('tk-fecha').value=today();
 window.prevT=function(){
   const p=+document.getElementById('t-pri').value||0,c=+document.getElementById('t-cos').value||0,a=+document.getElementById('t-ant').value||0;
   document.getElementById('t-gp').textContent=fmt(p-c);
@@ -1180,6 +1200,231 @@ window.togT=function(c){const tb=c.querySelector('.tb'),btn=c.querySelector('.tc
 window.copT=function(e,btn){e.stopPropagation();const tb=btn.previousElementSibling;navigator.clipboard.writeText(tb.textContent.trim()).then(()=>toast('Copiado ✓'));};
 
 // ===================================
+// TAREAS
+// ===================================
+const TK_TIPOS = {
+  llamado:'📞 Llamado', cobro:'💰 Cobro', entrega:'📦 Entrega',
+  compra:'🛒 Compra', presupuesto:'📝 Presupuesto', taller:'🪵 Taller',
+  redes:'📱 Redes', admin:'📋 Admin', pago:'💳 Pago', otro:'📌 Otro'
+};
+const TK_PRIO = {urgente:'🔴', normal:'🟡', baja:'🟢'};
+
+function diasHastaFecha(fecha){
+  if(!fecha) return 999;
+  const hoy = new Date(); hoy.setHours(0,0,0,0);
+  const f = new Date(fecha+'T00:00:00'); f.setHours(0,0,0,0);
+  return Math.round((f-hoy)/(1000*60*60*24));
+}
+
+function inicializarTareasFecha(){
+  if(document.getElementById('tk-fecha'))
+    document.getElementById('tk-fecha').value = today();
+}
+
+window.addTareaNew = async function(){
+  const txt = document.getElementById('tk-txt').value.trim();
+  if(!txt){ toast('Escribí la descripción'); return; }
+  const id = 'tk'+uid();
+  const t = {
+    id, texto: txt,
+    tipo: document.getElementById('tk-tipo').value,
+    prioridad: document.getElementById('tk-prio').value,
+    fecha: document.getElementById('tk-fecha').value || today(),
+    hora: document.getElementById('tk-hora').value || '',
+    nota: document.getElementById('tk-nota').value.trim(),
+    completada: false,
+    creada: today()
+  };
+  await fbSet('tareas', id, t);
+  document.getElementById('tk-txt').value='';
+  document.getElementById('tk-nota').value='';
+  document.getElementById('tk-hora').value='';
+  document.getElementById('tk-prio').value='normal';
+  toast('Tarea agregada ✓');
+};
+
+window.toggleTarea = async function(id){
+  const t = tareas.find(x=>x.id===id);
+  if(!t) return;
+  await fbSet('tareas', id, {...t, completada: !t.completada});
+};
+
+window.delTarea = async function(id){
+  if(!confirm('¿Eliminás esta tarea?')) return;
+  await fbDel('tareas', id); toast('Eliminado');
+};
+
+window.filtroTK = function(f, btn){
+  tkFiltro = f;
+  document.querySelectorAll('#pg-tareas .btn.bsm').forEach(b=>{ b.style.color=''; b.style.borderColor=''; });
+  btn.style.borderColor='var(--gold)'; btn.style.color='var(--gold)';
+  renderTareas();
+};
+
+function renderTareas(){
+  inicializarTareasFecha();
+  const hoy = today();
+  const finSemana = new Date(); finSemana.setDate(finSemana.getDate()+6);
+  const finSemanaStr = finSemana.toISOString().split('T')[0];
+
+  // Calcular KPIs
+  const vencidas = tareas.filter(t=>!t.completada && t.fecha < hoy);
+  const deHoy = tareas.filter(t=>t.fecha === hoy);
+  const deSemana = tareas.filter(t=>t.fecha >= hoy && t.fecha <= finSemanaStr);
+  const compHoy = tareas.filter(t=>t.completada && t.fecha === hoy);
+
+  if(document.getElementById('tk-venc')) document.getElementById('tk-venc').textContent = vencidas.length;
+  if(document.getElementById('tk-hoy')) document.getElementById('tk-hoy').textContent = deHoy.length;
+  if(document.getElementById('tk-sem')) document.getElementById('tk-sem').textContent = deSemana.length;
+  if(document.getElementById('tk-comp')) document.getElementById('tk-comp').textContent = compHoy.length;
+
+  // Alertas automáticas en tareas
+  const alertDiv = document.getElementById('tareas-alertas');
+  if(alertDiv){
+    const urgs = tareas.filter(t=>!t.completada && (t.fecha < hoy || (t.fecha===hoy && t.prioridad==='urgente')));
+    alertDiv.innerHTML = urgs.length ? urgs.slice(0,3).map(t=>{
+      const d = diasHastaFecha(t.fecha);
+      const txt = d < 0 ? `Vencida hace ${Math.abs(d)} día${Math.abs(d)>1?'s':''}` : 'Vence hoy';
+      return `<div class="alert al-rd" style="margin-bottom:6px"><span>${TK_PRIO[t.prioridad]||'🔴'}</span><span><strong>${txt}:</strong> ${TK_TIPOS[t.tipo]||''} — ${t.texto}</span></div>`;
+    }).join('') : '';
+  }
+
+  // Filtrar tareas
+  let filtradas = [...tareas];
+  if(tkFiltro==='hoy') filtradas = filtradas.filter(t=>t.fecha===hoy);
+  else if(tkFiltro==='semana') filtradas = filtradas.filter(t=>t.fecha>=hoy && t.fecha<=finSemanaStr);
+  else if(tkFiltro==='urgente') filtradas = filtradas.filter(t=>t.prioridad==='urgente' && !t.completada);
+  else if(tkFiltro==='pendientes') filtradas = filtradas.filter(t=>!t.completada);
+
+  // Ordenar: vencidas primero, luego por fecha+hora
+  filtradas.sort((a,b)=>{
+    if(a.completada !== b.completada) return a.completada ? 1 : -1;
+    const da = (a.fecha||'9999')+(a.hora||'23:59');
+    const db2 = (b.fecha||'9999')+(b.hora||'23:59');
+    return da.localeCompare(db2);
+  });
+
+  const lista = document.getElementById('tk-lista');
+  if(!lista) return;
+  if(!filtradas.length){
+    lista.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">Sin tareas para mostrar</div>';
+  } else {
+    // Agrupar por fecha
+    const grupos = {};
+    filtradas.forEach(t=>{
+      const k = t.fecha || 'sin-fecha';
+      if(!grupos[k]) grupos[k]=[];
+      grupos[k].push(t);
+    });
+    lista.innerHTML = Object.keys(grupos).sort().map(fecha=>{
+      const d = diasHastaFecha(fecha);
+      let labelFecha = fecha;
+      if(fecha===hoy) labelFecha = 'Hoy';
+      else if(d===1) labelFecha = 'Mañana';
+      else if(d<0) labelFecha = `Vencida (${fecha})`;
+      else labelFecha = fecha;
+      const colorFecha = d<0 ? 'var(--red,#c44)' : d===0 ? 'var(--gold)' : 'var(--text3)';
+
+      return `<div style="margin-bottom:12px">
+        <div style="font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:${colorFecha};margin-bottom:6px">${labelFecha}</div>
+        ${grupos[fecha].map(t=>{
+          const vencida = !t.completada && t.fecha < hoy;
+          const bg = t.completada ? 'var(--green-bg)' : vencida ? 'var(--red-bg)' : 'var(--bg3)';
+          const textDeco = t.completada ? 'line-through;opacity:0.5' : '';
+          return `<div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:${bg};border-radius:10px;margin-bottom:6px">
+            <input type="checkbox" ${t.completada?'checked':''} onchange="toggleTarea('${t.id}')" style="margin-top:3px;flex-shrink:0;cursor:pointer;width:16px;height:16px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:2px">
+                <span style="font-size:10px">${TK_PRIO[t.prioridad]||''}</span>
+                <span style="font-size:10px;color:var(--text3)">${TK_TIPOS[t.tipo]||t.tipo}</span>
+                ${t.hora?`<span style="font-size:10px;color:var(--gold)">🕐 ${t.hora}</span>`:''}
+              </div>
+              <div style="font-size:13px;color:var(--text);text-decoration:${textDeco}">${t.texto}</div>
+              ${t.nota?`<div style="font-size:11px;color:var(--text3);margin-top:2px">${t.nota}</div>`:''}
+            </div>
+            <button class="btn bdr bsm" onclick="delTarea('${t.id}')" style="flex-shrink:0">✕</button>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('');
+  }
+
+  // Vista semanal
+  const semDiv = document.getElementById('tk-semana');
+  if(semDiv){
+    const dias = [];
+    for(let i=0;i<7;i++){
+      const d = new Date(); d.setDate(d.getDate()+i);
+      dias.push(d.toISOString().split('T')[0]);
+    }
+    semDiv.innerHTML = dias.map(f=>{
+      const dTareas = tareas.filter(t=>t.fecha===f);
+      const comp = dTareas.filter(t=>t.completada).length;
+      const total = dTareas.length;
+      const d = diasHastaFecha(f);
+      const label = d===0?'Hoy':d===1?'Mañ':f.slice(8);
+      const color = total===0?'var(--text3)':comp===total?'#7ab87a':'var(--gold)';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:12px">
+        <span style="color:var(--text2);min-width:36px">${label}</span>
+        <span style="color:var(--text3);flex:1;padding:0 8px">${dTareas.filter(t=>!t.completada).map(t=>TK_TIPOS[t.tipo]?.split(' ')[0]).join(' ')}</span>
+        <span style="color:${color};font-weight:500">${total===0?'—':`${comp}/${total}`}</span>
+      </div>`;
+    }).join('');
+  }
+}
+
+// ===================================
+// ALERTAS GLOBALES (Dashboard + Finanzas)
+// ===================================
+function renderAlertasGlobales(){
+  const hoy = today();
+  const alertas = [];
+
+  // Alertas de compromisos financieros no pagados
+  const m = mes();
+  const pagosM = pagosFin.filter(p=>p.mes===m);
+  compromisos.forEach(c=>{
+    const pagado = pagosM.find(p=>p.compromisoId===c.id);
+    if(!pagado && c.vencimiento){
+      const d = diasHastaFecha(`${hoy.substring(0,8)}${String(c.vencimiento).padStart(2,'0')}`);
+      // Si el día ya pasó este mes, calculamos diferente
+      const diaHoy = parseInt(hoy.substring(8));
+      const diasRestantes = c.vencimiento >= diaHoy ? c.vencimiento - diaHoy : -(diaHoy - c.vencimiento);
+      if(diasRestantes <= 3){
+        const txt = diasRestantes < 0 ? `VENCIDA hace ${Math.abs(diasRestantes)}d` : diasRestantes===0 ? 'Vence HOY' : `Vence en ${diasRestantes}d`;
+        alertas.push({tipo:'danger', msg:`💳 ${c.nombre}: ${txt} — ${fmt(c.monto)}`});
+      } else if(diasRestantes <= 7){
+        alertas.push({tipo:'warning', msg:`💳 ${c.nombre}: vence en ${diasRestantes} días — ${fmt(c.monto)}`});
+      }
+    } else if(!pagado && !c.vencimiento){
+      alertas.push({tipo:'info', msg:`💳 ${c.nombre}: pendiente de pago — ${fmt(c.monto)}`});
+    }
+  });
+
+  // Tareas vencidas
+  const tareasVenc = tareas.filter(t=>!t.completada && t.fecha < hoy);
+  if(tareasVenc.length){
+    alertas.push({tipo:'warning', msg:`✅ Tenés ${tareasVenc.length} tarea${tareasVenc.length>1?'s':''} vencida${tareasVenc.length>1?'s':''} sin completar`});
+  }
+
+  // Tareas urgentes de hoy
+  const urgsHoy = tareas.filter(t=>!t.completada && t.fecha===hoy && t.prioridad==='urgente');
+  if(urgsHoy.length){
+    alertas.push({tipo:'danger', msg:`🔴 ${urgsHoy.length} tarea${urgsHoy.length>1?'s':''} urgente${urgsHoy.length>1?'s':''} para hoy`});
+  }
+
+  const html = alertas.map(a=>`<div class="alert al-${a.tipo==='danger'?'rd':a.tipo==='warning'?'am':'bl'}" style="margin-bottom:6px"><span>${a.tipo==='danger'?'⚠️':a.tipo==='warning'?'⚡':'ℹ️'}</span><span>${a.msg}</span></div>`).join('');
+
+  // Inyectar en Dashboard
+  const dashAlert = document.getElementById('dash-alertas-fin');
+  if(dashAlert) dashAlert.innerHTML = html;
+
+  // Inyectar en Finanzas
+  const finAlert = document.getElementById('fin-alertas-glob');
+  if(finAlert) finAlert.innerHTML = html;
+}
+
+// ===================================
 // COMPRAS E INSUMOS
 // ===================================
 const FPAGO_LABEL = {efectivo:'💵 Efectivo', transferencia:'🏦 Transferencia', cheque:'📝 Cheque', cuenta_corriente:'🏛️ Cta. Cte.'};
@@ -1446,7 +1691,7 @@ function renderFinanzas(){
 // RENDER ALL
 // ===================================
 function renderAll(){
-  renderT(FA);renderP();renderC();renderG();renderGF();renderDash();renderStats();renderObjetivos();renderCompras();renderFinanzas();updSel();
+  renderT(FA);renderP();renderC();renderG();renderGF();renderDash();renderStats();renderObjetivos();renderCompras();renderFinanzas();renderTareas();renderAlertasGlobales();updSel();
 }
 
 // ===================================
