@@ -1,5 +1,5 @@
-const CACHE = 'plumanegra-v15-fix';
-const ASSETS = ['/', '/index.html', '/manifest.json'];
+const CACHE = 'plumanegra-v16';
+const ASSETS = ['/plumanegra/', '/plumanegra/index.html', '/plumanegra/manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -24,7 +24,6 @@ self.addEventListener('fetch', e => {
       e.request.url.includes('firestore')) {
     return;
   }
-  // Network-first para HTML, así siempre busca la versión más nueva
   if (e.request.mode === 'navigate' || e.request.url.endsWith('.html')) {
     e.respondWith(
       fetch(e.request).catch(() => caches.match(e.request))
