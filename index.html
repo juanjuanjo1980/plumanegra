@@ -1847,6 +1847,44 @@ window.exportarResumen = function() {
   });
   txt += '\n';
 
+  // CHEQUES Y COMPRAS
+  const chequesTodos = compras.filter(c => c.fpago === 'cheque');
+  const chequesPendientes = chequesTodos.filter(c => diasHasta(c.chequeVenc) >= 0);
+  const chequesVencidos = chequesTodos.filter(c => diasHasta(c.chequeVenc) < 0);
+  const totalChequesPend = chequesPendientes.reduce((a,c)=>a+c.monto,0);
+
+  txt += '📝 CHEQUES EMITIDOS\n';
+  txt += '---------------------------------\n';
+  if (chequesTodos.length === 0) {
+    txt += 'Sin cheques registrados\n';
+  } else {
+    [...chequesPendientes].sort((a,b)=>(a.chequeVenc||'').localeCompare(b.chequeVenc||'')).forEach(c => {
+      const d = diasHasta(c.chequeVenc);
+      const estado = d===0 ? 'VENCE HOY' : d<=7 ? `vence en ${d}d` : `vence ${c.chequeVenc}`;
+      txt += `• ${c.desc} (${c.proveedor||'sin proveedor'}): ${fmt2(c.monto)} — ${estado}\n`;
+    });
+    chequesVencidos.forEach(c => {
+      const d = Math.abs(diasHasta(c.chequeVenc));
+      txt += `• ${c.desc} (${c.proveedor||'sin proveedor'}): ${fmt2(c.monto)} — VENCIDO hace ${d}d\n`;
+    });
+    txt += `TOTAL CHEQUES PENDIENTES: ${fmt2(totalChequesPend)}\n`;
+  }
+  txt += '\n';
+
+  txt += '🛒 COMPRAS DEL MES\n';
+  txt += '---------------------------------\n';
+  const comprasMes = compras.filter(c => c.fecha && c.fecha.startsWith(m));
+  if (comprasMes.length === 0) {
+    txt += 'Sin compras registradas este mes\n';
+  } else {
+    const totalComprasMes = comprasMes.reduce((a,c)=>a+c.monto,0);
+    [...comprasMes].sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||'')).forEach(c => {
+      txt += `• ${c.fecha} - ${c.desc}: ${fmt2(c.monto)} (${FPAGO_LABEL[c.fpago]||c.fpago})\n`;
+    });
+    txt += `TOTAL COMPRAS DEL MES: ${fmt2(totalComprasMes)}\n`;
+  }
+  txt += '\n';
+
   txt += '📈 COBROS RECIENTES (últimos 10)\n';
   txt += '---------------------------------\n';
   const cobRecientes = [...cobros].sort((a,b) => b.fecha?.localeCompare(a.fecha)).slice(0,10);
