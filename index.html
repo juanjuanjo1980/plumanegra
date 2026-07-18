@@ -298,6 +298,82 @@ td strong{color:var(--text);font-weight:500;}
     <div class="kpi gd"><div class="kpi-l">Tasa cierre</div><div class="kpi-v" id="p-tas">0%</div></div>
   </div>
   <div class="card" style="margin-top:12px">
+    <div class="ch"><span class="ct">🧮 Calculadora de presupuesto</span></div>
+    <div class="cb">
+      <div class="brow" style="margin-top:0">
+        <button class="btn bg2b bsm calc-tab" style="border-color:var(--gold);color:var(--gold)" onclick="calcSwitchTab('tablas',this)">Tablas de asado</button>
+        <button class="btn bg2b bsm calc-tab" onclick="calcSwitchTab('mesadas',this)">Mesadas</button>
+        <button class="btn bg2b bsm calc-tab" onclick="calcSwitchTab('mesas',this)">Mesas</button>
+        <button class="btn bg2b bsm calc-tab" onclick="calcSwitchTab('mobiliario',this)">Mobiliario a medida</button>
+      </div>
+
+      <div id="calc-panel-tablas" class="calc-panel">
+        <div class="fg" style="margin-top:12px">
+          <div class="fi"><label>Cliente (opcional)</label><input id="ct-cli" placeholder="Nombre"></div>
+          <div class="fi full"><label>Artículo</label><input id="ct-art" placeholder="Tabla de asado euca 40x25"></div>
+          <div class="fi"><label>Tipo de madera</label><select id="ct-mad"><option>Eucaliptus</option><option>Laurel</option><option>Guayubira</option><option>Olivo</option></select></div>
+          <div class="fi"><label>Valor madera ($)</label><input type="number" id="ct-val" placeholder="0"></div>
+          <div class="fi"><label>Ancho (m)</label><input type="number" id="ct-anc" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Largo (m)</label><input type="number" id="ct-lar" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Espesor</label><select id="ct-esp"><option value="11">1 pulgada (11)</option><option value="22">2 pulgadas (22)</option><option value="33">3 pulgadas (33)</option></select></div>
+          <div class="fi"><label>Multiplicador de ganancia</label><input type="number" id="ct-mult" placeholder="ej: 2 o 2.5" step="0.1"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="calcTablas()">Calcular</button><button class="btn bg2b" onclick="calcClearPanel('tablas')">Limpiar</button></div>
+        <div id="ct-resultado"></div>
+      </div>
+
+      <div id="calc-panel-mesadas" class="calc-panel" style="display:none">
+        <div class="fg" style="margin-top:12px">
+          <div class="fi"><label>Cliente (opcional)</label><input id="cm-cli" placeholder="Nombre"></div>
+          <div class="fi full"><label>Artículo</label><input id="cm-art" placeholder="Mesada euca lavadero"></div>
+          <div class="fi"><label>Tipo de madera</label><select id="cm-mad"><option>Eucaliptus</option><option>Laurel</option><option>Guayubira</option><option>Olivo</option></select></div>
+          <div class="fi"><label>Valor madera ($)</label><input type="number" id="cm-val" placeholder="0"></div>
+          <div class="fi"><label>Ancho (m)</label><input type="number" id="cm-anc" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Largo (m)</label><input type="number" id="cm-lar" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Espesor</label><select id="cm-esp"><option value="11">1 pulgada (11)</option><option value="22">2 pulgadas (22)</option><option value="33">3 pulgadas (33)</option></select></div>
+          <div class="fi"><label>Multiplicador de ganancia</label><input type="number" id="cm-mult" placeholder="ej: 2 o 2.5" step="0.1"></div>
+          <div class="fi"><label>Laqueado ($, si desea)</label><input type="number" id="cm-laq" placeholder="0"></div>
+          <div class="fi"><label>Bacha ($, si desea)</label><input type="number" id="cm-bac" placeholder="0"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="calcMesada()">Calcular</button><button class="btn bg2b" onclick="calcClearPanel('mesadas')">Limpiar</button></div>
+        <div id="cm-resultado"></div>
+      </div>
+
+      <div id="calc-panel-mesas" class="calc-panel" style="display:none">
+        <div class="fg" style="margin-top:12px">
+          <div class="fi"><label>Cliente (opcional)</label><input id="cs-cli" placeholder="Nombre"></div>
+          <div class="fi full"><label>Artículo</label><input id="cs-art" placeholder="Mesa guayubira 2x1"></div>
+          <div class="fi"><label>Tipo de madera (tapa)</label><select id="cs-mad"><option>Eucaliptus</option><option>Laurel</option><option>Guayubira</option><option>Olivo</option></select></div>
+          <div class="fi"><label>Valor madera ($)</label><input type="number" id="cs-val" placeholder="0"></div>
+          <div class="fi"><label>Ancho tapa (m)</label><input type="number" id="cs-anc" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Largo tapa (m)</label><input type="number" id="cs-lar" placeholder="0" step="0.01"></div>
+          <div class="fi"><label>Espesor tapa</label><select id="cs-esp"><option value="11">1 pulgada (11)</option><option value="22">2 pulgadas (22)</option><option value="33">3 pulgadas (33)</option></select></div>
+          <div class="fi"><label>Multiplicador de ganancia (tapa)</label><input type="number" id="cs-mult" placeholder="ej: 2 o 2.5" step="0.1"></div>
+          <div class="fi"><label>Patas — material</label><select id="cs-patmat"><option>Hierro</option><option>Madera</option><option>Comprado</option></select></div>
+          <div class="fi"><label>Patas — cotización tercero ($)</label><input type="number" id="cs-patcost" placeholder="0"></div>
+          <div class="fi"><label>Ganancia sobre patas (%)</label><input type="number" id="cs-patganpct" placeholder="0"></div>
+          <div class="fi"><label>Ganancia sobre patas ($ fijo)</label><input type="number" id="cs-patganmonto" placeholder="0"></div>
+          <div class="fi"><label>Laqueado ($)</label><input type="number" id="cs-laq" placeholder="0"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="calcMesa()">Calcular</button><button class="btn bg2b" onclick="calcClearPanel('mesas')">Limpiar</button></div>
+        <div id="cs-resultado"></div>
+      </div>
+
+      <div id="calc-panel-mobiliario" class="calc-panel" style="display:none">
+        <div class="fg" style="margin-top:12px">
+          <div class="fi"><label>Cliente (opcional)</label><input id="cb-cli" placeholder="Nombre"></div>
+          <div class="fi full"><label>Artículo</label><input id="cb-art" placeholder="Placard a medida dormitorio"></div>
+          <div class="fi"><label>Costo tercero (armado) ($)</label><input type="number" id="cb-terc" placeholder="0"></div>
+          <div class="fi"><label>Ganancia sobre tercero (%)</label><input type="number" id="cb-ganpct" placeholder="0"></div>
+          <div class="fi"><label>Ganancia sobre tercero ($ fijo)</label><input type="number" id="cb-ganmonto" placeholder="0"></div>
+          <div class="fi"><label>Terminación final / barnizado ($)</label><input type="number" id="cb-term" placeholder="0"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="calcMobiliario()">Calcular</button><button class="btn bg2b" onclick="calcClearPanel('mobiliario')">Limpiar</button></div>
+        <div id="cb-resultado"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:12px">
     <div class="ch"><span class="ct">Nueva consulta</span></div>
     <div class="cb">
       <div class="fg">
@@ -977,6 +1053,160 @@ function renderP(){
   }).join('');
 }
 window.chgPres=async function(id,est){const p=presupuestos.find(x=>x.id===id);if(p){p.estado=est;await fbSet('presupuestos',id,p);}};
+
+// ===================================
+// ===================================
+// CALCULADORA DE PRESUPUESTO
+// ===================================
+window.__calcResults={tablas:null,mesadas:null,mesas:null,mobiliario:null};
+
+window.calcSwitchTab=function(tab,btn){
+  document.querySelectorAll('.calc-tab').forEach(b=>{b.style.borderColor='';b.style.color='';});
+  btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';
+  document.querySelectorAll('.calc-panel').forEach(p=>p.style.display='none');
+  document.getElementById('calc-panel-'+tab).style.display='';
+};
+
+function calcResultadoHTML(tab,art,medidaTxt,lineas,total,wtext){
+  return '<div style="background:var(--bg3);border-radius:10px;padding:12px;font-size:12px;line-height:1.8;margin-top:12px">'+
+    '<strong>'+art+'</strong>'+(medidaTxt?' · '+medidaTxt:'')+'<br>'+
+    lineas.join('<br>')+
+    '<br><strong style="color:var(--gold);font-size:14px">💰 Total: '+fmt(total)+'</strong>'+
+    '</div>'+
+    '<div style="margin-top:10px">'+
+    '<label style="font-size:11px;color:var(--text2)">Texto para WhatsApp</label>'+
+    '<div style="white-space:pre-wrap;word-break:break-word;background:var(--bg2);border-radius:7px;border-left:2px solid var(--gold-dim);padding:9px 11px;font-size:11px;color:var(--text2);line-height:1.7;margin-top:4px">'+wtext+'</div>'+
+    '<button class="tcb" style="display:inline-flex;margin-top:6px" onclick="calcCopy(\''+tab+'\')">📋 Copiar</button>'+
+    '</div>'+
+    '<div class="brow" style="margin-top:10px"><button class="btn bp" onclick="calcUsar(\''+tab+'\')">Usar este precio en la consulta ↓</button></div>';
+}
+
+window.calcCopy=function(tab){
+  const r=window.__calcResults[tab];
+  if(!r){toast('Primero calculá el presupuesto');return;}
+  navigator.clipboard.writeText(r.wtext).then(()=>toast('Copiado ✓'));
+};
+window.calcUsar=function(tab){
+  const r=window.__calcResults[tab];
+  if(!r){toast('Primero calculá el presupuesto');return;}
+  document.getElementById('p-cli').value=r.cli||'';
+  document.getElementById('p-dsc').value=r.art;
+  document.getElementById('p-pri').value=Math.round(r.total);
+  document.getElementById('p-cli').scrollIntoView({behavior:'smooth',block:'center'});
+  toast('Precio cargado en la consulta ↓');
+};
+window.calcClearPanel=function(tab){
+  document.querySelectorAll('#calc-panel-'+tab+' input, #calc-panel-'+tab+' select').forEach(el=>{
+    if(el.tagName==='SELECT'){el.selectedIndex=0;}else{el.value='';}
+  });
+  const resEl=document.getElementById({tablas:'ct',mesadas:'cm',mesas:'cs',mobiliario:'cb'}[tab]+'-resultado');
+  if(resEl) resEl.innerHTML='';
+  window.__calcResults[tab]=null;
+};
+
+// --- Tablas de asado: ancho × largo × espesor(11/22/33 literal) × valor madera, × multiplicador de ganancia. Terminación ya incluida en el valor de la madera. ---
+window.calcTablas=function(){
+  const cli=document.getElementById('ct-cli').value.trim();
+  const art=document.getElementById('ct-art').value.trim()||'(sin nombre)';
+  const mad=document.getElementById('ct-mad').value;
+  const val=+document.getElementById('ct-val').value||0;
+  const anc=+document.getElementById('ct-anc').value||0;
+  const lar=+document.getElementById('ct-lar').value||0;
+  const esp=+document.getElementById('ct-esp').value||0;
+  const mult=+document.getElementById('ct-mult').value||1;
+
+  const costoMadera=anc*lar*esp*val;
+  const total=costoMadera*mult;
+
+  const medidaTxt=anc+'m × '+lar+'m × esp.'+esp+' ('+mad+')';
+  const lineas=['🪵 Costo madera: '+fmt(costoMadera),'✖️ Multiplicador de ganancia: x'+mult];
+  const wtext='Hola '+(cli||'[nombre]')+', acá va tu presupuesto 👇\n📐 '+art+' — '+medidaTxt+'\n💰 Total: '+fmt(total)+'\n¿Lo confirmamos?';
+
+  document.getElementById('ct-resultado').innerHTML=calcResultadoHTML('tablas',art,medidaTxt,lineas,total,wtext);
+  window.__calcResults.tablas={cli,art,total,wtext};
+};
+
+// --- Mesadas: ancho × largo × espesor × valor madera, × multiplicador de ganancia; laqueado y bacha se suman aparte DESPUÉS de la ganancia. ---
+window.calcMesada=function(){
+  const cli=document.getElementById('cm-cli').value.trim();
+  const art=document.getElementById('cm-art').value.trim()||'(sin nombre)';
+  const mad=document.getElementById('cm-mad').value;
+  const val=+document.getElementById('cm-val').value||0;
+  const anc=+document.getElementById('cm-anc').value||0;
+  const lar=+document.getElementById('cm-lar').value||0;
+  const esp=+document.getElementById('cm-esp').value||0;
+  const mult=+document.getElementById('cm-mult').value||1;
+  const laq=+document.getElementById('cm-laq').value||0;
+  const bac=+document.getElementById('cm-bac').value||0;
+
+  const costoMadera=anc*lar*esp*val;
+  const base=costoMadera*mult;
+  const total=base+laq+bac;
+
+  const medidaTxt=anc+'m × '+lar+'m × esp.'+esp+' ('+mad+')';
+  const lineas=['🪵 Costo madera: '+fmt(costoMadera),'✖️ Multiplicador de ganancia: x'+mult+' = '+fmt(base)]
+    .concat(laq>0?['🧴 Laqueado: '+fmt(laq)]:[])
+    .concat(bac>0?['🚰 Bacha: '+fmt(bac)]:[]);
+  const wtext='Hola '+(cli||'[nombre]')+', acá va tu presupuesto 👇\n📐 '+art+' — '+medidaTxt+
+    (laq>0?'\n🧴 Incluye laqueado':'')+(bac>0?'\n🚰 Incluye bacha':'')+
+    '\n💰 Total: '+fmt(total)+'\n¿Lo confirmamos?';
+
+  document.getElementById('cm-resultado').innerHTML=calcResultadoHTML('mesadas',art,medidaTxt,lineas,total,wtext);
+  window.__calcResults.mesadas={cli,art,total,wtext};
+};
+
+// --- Mesas: tapa (ancho×largo×espesor×valor madera × multiplicador) + patas (cotización tercero + % o $ de ganancia propia) + laqueado aparte. ---
+window.calcMesa=function(){
+  const cli=document.getElementById('cs-cli').value.trim();
+  const art=document.getElementById('cs-art').value.trim()||'(sin nombre)';
+  const mad=document.getElementById('cs-mad').value;
+  const val=+document.getElementById('cs-val').value||0;
+  const anc=+document.getElementById('cs-anc').value||0;
+  const lar=+document.getElementById('cs-lar').value||0;
+  const esp=+document.getElementById('cs-esp').value||0;
+  const mult=+document.getElementById('cs-mult').value||1;
+  const patmat=document.getElementById('cs-patmat').value;
+  const patcost=+document.getElementById('cs-patcost').value||0;
+  const patganpct=+document.getElementById('cs-patganpct').value||0;
+  const patganmonto=+document.getElementById('cs-patganmonto').value||0;
+  const laq=+document.getElementById('cs-laq').value||0;
+
+  const costoTapa=anc*lar*esp*val;
+  const tapaConGanancia=costoTapa*mult;
+  const patasFinal=patcost*(1+patganpct/100)+patganmonto;
+  const total=tapaConGanancia+patasFinal+laq;
+
+  const medidaTxt=anc+'m × '+lar+'m × esp.'+esp+' ('+mad+')';
+  const lineas=['🪵 Tapa — costo madera: '+fmt(costoTapa),'✖️ Multiplicador de ganancia: x'+mult+' = '+fmt(tapaConGanancia),
+    '🦿 Patas ('+patmat+'): '+fmt(patasFinal)]
+    .concat(laq>0?['🧴 Laqueado: '+fmt(laq)]:[]);
+  const wtext='Hola '+(cli||'[nombre]')+', acá va tu presupuesto 👇\n📐 '+art+' — tapa '+medidaTxt+' + patas '+patmat+
+    (laq>0?' + laqueado':'')+'\n💰 Total: '+fmt(total)+'\n¿Lo confirmamos?';
+
+  document.getElementById('cs-resultado').innerHTML=calcResultadoHTML('mesas',art,medidaTxt,lineas,total,wtext);
+  window.__calcResults.mesas={cli,art,total,wtext};
+};
+
+// --- Mobiliario a medida: costo del tercero que arma + % o $ de ganancia propia + terminación final/barnizado aparte. ---
+window.calcMobiliario=function(){
+  const cli=document.getElementById('cb-cli').value.trim();
+  const art=document.getElementById('cb-art').value.trim()||'(sin nombre)';
+  const terc=+document.getElementById('cb-terc').value||0;
+  const ganpct=+document.getElementById('cb-ganpct').value||0;
+  const ganmonto=+document.getElementById('cb-ganmonto').value||0;
+  const term=+document.getElementById('cb-term').value||0;
+
+  const terceroFinal=terc*(1+ganpct/100)+ganmonto;
+  const total=terceroFinal+term;
+
+  const lineas=['🔧 Costo tercero: '+fmt(terc),'💵 + ganancia: '+fmt(terceroFinal-terc)+' = '+fmt(terceroFinal)]
+    .concat(term>0?['🎨 Terminación final: '+fmt(term)]:[]);
+  const wtext='Hola '+(cli||'[nombre]')+', acá va tu presupuesto 👇\n📐 '+art+
+    (term>0?' + terminación final':'')+'\n💰 Total: '+fmt(total)+'\n¿Lo confirmamos?';
+
+  document.getElementById('cb-resultado').innerHTML=calcResultadoHTML('mobiliario',art,'',lineas,total,wtext);
+  window.__calcResults.mobiliario={cli,art,total,wtext};
+};
 
 // ===================================
 // COBRANZAS
