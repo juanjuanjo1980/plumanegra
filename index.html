@@ -656,7 +656,7 @@ td strong{color:var(--text);font-weight:500;}
           </select>
         </div>
         <div class="fi"><label>Monto mensual ($)</label><input type="number" id="fn-mon" placeholder="700000"></div>
-        <div class="fi"><label>Día de vencimiento</label><input type="number" id="fn-venc" placeholder="5" min="1" max="31"></div>
+        <div class="fi"><label>Fecha de vencimiento</label><input type="date" id="fn-venc"><div style="font-size:10px;color:var(--text3);margin-top:2px">Se guarda el día del mes — el compromiso se repite todos los meses en esa fecha</div></div>
       </div>
       <div class="brow"><button class="btn bp" onclick="addCompromiso()">Agregar</button></div>
     </div>
@@ -1852,7 +1852,9 @@ window.addCompromiso = async function(){
   const mon = +document.getElementById('fn-mon').value||0;
   if(!nom||!mon){toast('Completá nombre y monto');return;}
   const id = 'fn'+uid();
-  const c = {id, nombre:nom, tipo:document.getElementById('fn-tipo').value, monto:mon, vencimiento:+document.getElementById('fn-venc').value||0, activo:true};
+  const vencDate = document.getElementById('fn-venc').value;
+  const vencDia = vencDate ? new Date(vencDate+'T00:00:00').getDate() : 0;
+  const c = {id, nombre:nom, tipo:document.getElementById('fn-tipo').value, monto:mon, vencimiento:vencDia, activo:true};
   await fbSet('compromisos',id,c);
   document.getElementById('fn-nom').value=''; document.getElementById('fn-mon').value=''; document.getElementById('fn-venc').value='';
   toast('Compromiso agregado ✓');
@@ -1907,7 +1909,12 @@ function renderFinanzas(){
   if(!compromisos.length){
     lista.innerHTML='<div style="text-align:center;padding:20px;color:var(--text3);font-size:12px">Sin compromisos cargados aún</div>';
   } else {
-    const sorted = [...compromisos].sort((a,b)=>b.monto-a.monto);
+    const sorted = [...compromisos].sort((a,b)=>{
+      const pagadoA = !!pagosEsteMes.find(p=>p.compromisoId===a.id);
+      const pagadoB = !!pagosEsteMes.find(p=>p.compromisoId===b.id);
+      if(pagadoA !== pagadoB) return pagadoA ? 1 : -1;
+      return b.monto-a.monto;
+    });
     lista.innerHTML = sorted.map(c=>{
       const pago = pagosEsteMes.find(p=>p.compromisoId===c.id);
       const pagado = !!pago;
