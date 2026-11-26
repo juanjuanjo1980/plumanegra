@@ -175,6 +175,7 @@ td strong{color:var(--text);font-weight:500;}
   <div class="splash-sub" id="splash-msg">Conectando con Firebase...</div>
   <div class="splash-spin" id="splash-spin"></div>
   <div id="splash-error" style="display:none;margin-top:20px;padding:16px;background:rgba(200,50,50,0.15);border-radius:10px;max-width:320px;font-size:12px;color:#8B1A1A;text-align:center;line-height:1.6"></div>
+  <button id="splash-login" onclick="govLogin()" style="display:none;margin-top:16px;background:#2d1a05;color:#fff;border:none;border-radius:8px;padding:12px 26px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif">Entrar con Google</button>
   <button id="splash-retry" onclick="location.reload()" style="display:none;margin-top:16px;background:#8B5E1A;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif">Reintentar</button>
 </div>
 
@@ -223,6 +224,7 @@ td strong{color:var(--text);font-weight:500;}
       📋 Copiar todo — pegar en Claude
     </button>
   </div>
+  <div id="gov-card" style="margin-bottom:16px;padding:12px 14px;background:#ede0cc;border:1px solid rgba(0,0,0,0.15);border-radius:12px;font-family:'DM Sans',sans-serif"></div>
   <div id="dash-alertas-fin"></div>
   <div class="slabel">Este mes</div><div class="kpi-v" id="d-gan">$0</div><div class="kpi-s">meta $5.000.000</div></div>
     <div class="kpi am"><div class="kpi-l">Cobrado este mes</div><div class="kpi-v" id="d-cob">$0</div><div class="kpi-s" id="d-ncob">0 cobros</div></div>
@@ -774,6 +776,7 @@ td strong{color:var(--text);font-weight:500;}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, reauthenticateWithPopup, reauthenticateWithRedirect, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
 // ===================================
 // FIREBASE CONFIG
@@ -789,6 +792,148 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// ===================================
+// ACCESO (solo Juan) + CONEXIÓN CON GOV (Drive)
+// ===================================
+const OWNER_EMAIL = 'jpdema.jpd@gmail.com';
+const auth = getAuth(app);
+const DRIVE_SCOPES = ['https://www.googleapis.com/auth/drive.file','https://www.googleapis.com/auth/drive.readonly'];
+function makeProvider(){
+  const pr = new GoogleAuthProvider();
+  DRIVE_SCOPES.forEach(sc=>pr.addScope(sc));
+  pr.setCustomParameters({login_hint: OWNER_EMAIL});
+  return pr;
+}
+function saveDriveToken(cred){
+  if(cred && cred.accessToken){
+    sessionStorage.setItem('gov_tok', JSON.stringify({t:cred.accessToken, exp: Date.now()+50*60*1000}));
+  }
+}
+function driveToken(){
+  try{ const o=JSON.parse(sessionStorage.getItem('gov_tok')||'null'); if(o && o.exp>Date.now()) return o.t; }catch(e){}
+  return null;
+}
+const popupFail = e => ['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/popup-closed-by-user','auth/cancelled-popup-request'].includes(e?.code);
+
+window.govLogin = async function(){
+  const pr = makeProvider();
+  try{ const r = await signInWithPopup(auth, pr); saveDriveToken(GoogleAuthProvider.credentialFromResult(r)); }
+  catch(e){ if(popupFail(e)) await signInWithRedirect(auth, pr); else showLoginError(e); }
+};
+window.govLogout = async function(){ sessionStorage.removeItem('gov_tok'); await signOut(auth); location.reload(); };
+window.govConectarDrive = async function(){
+  const pr = makeProvider();
+  try{ const r = await reauthenticateWithPopup(auth.currentUser, pr); saveDriveToken(GoogleAuthProvider.credentialFromResult(r)); await govSync(true); }
+  catch(e){ if(popupFail(e)) await reauthenticateWithRedirect(auth.currentUser, pr); else { console.error(e); toast('No se pudo conectar Drive'); } }
+};
+function showLoginError(e){
+  const el=document.getElementById('splash-error');
+  el.style.display='block'; el.textContent='No se pudo entrar: '+(e?.code||e?.message||e);
+}
+function showLogin(msg){
+  document.getElementById('splash').classList.remove('hide');
+  document.getElementById('splash-msg').textContent = msg || 'Entrá con tu cuenta de Google';
+  document.getElementById('splash-spin').style.display='none';
+  document.getElementById('splash-login').style.display='inline-block';
+}
+
+// --- Drive helpers ---
+async function driveFetch(url, opts={}){
+  const tok = driveToken(); if(!tok) throw new Error('sin-token');
+  const r = await fetch(url, {...opts, headers:{...(opts.headers||{}), Authorization:'Bearer '+tok}});
+  if(r.status===401){ sessionStorage.removeItem('gov_tok'); throw new Error('sin-token'); }
+  if(!r.ok) throw new Error('drive '+r.status);
+  return r;
+}
+async function driveFind(name){
+  const q = encodeURIComponent("name='"+name+"' and trashed=false");
+  const r = await driveFetch('https://www.googleapis.com/drive/v3/files?q='+q+'&orderBy=modifiedTime desc&fields=files(id,name,modifiedTime)');
+  return (await r.json()).files || [];
+}
+async function driveUploadJSON(name, obj){
+  const body = JSON.stringify(obj, null, 1);
+  const own = await driveFind(name);
+  const meta = {name, mimeType:'application/json'};
+  const boundary='gov'+Date.now();
+  const multipart = '--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(own.length?{}:meta)+'\r\n--'+boundary+'\r\nContent-Type: application/json\r\n\r\n'+body+'\r\n--'+boundary+'--';
+  const url = own.length
+    ? 'https://www.googleapis.com/upload/drive/v3/files/'+own[0].id+'?uploadType=multipart'
+    : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
+  await driveFetch(url, {method: own.length?'PATCH':'POST', headers:{'Content-Type':'multipart/related; boundary='+boundary}, body: multipart});
+}
+
+// --- Respaldo para Gov ---
+const GOV_COLS = ['trabajos','cobros','gastos','gastosFijos','presupuestos','compromisos','pagosFin','compras','tareas'];
+async function govRespaldo(){
+  const data = {generado_en: new Date().toISOString(), negocio:'Plumanegra', config:{deudaBancaria, sueldoMensual}};
+  data.trabajos=trabajos; data.cobros=cobros; data.gastos=gastos; data.gastosFijos=gastosFijos; data.presupuestos=presupuestos;
+  data.compromisos=compromisos; data.pagosFin=pagosFin; data.compras=compras; data.tareas=tareas;
+  await driveUploadJSON('plumanegra_backup_gov.json', data);
+  localStorage.setItem('gov_ult_respaldo', new Date().toLocaleString('es-AR'));
+}
+
+// --- Bandeja de Gov: propuestas que Juan aprueba ---
+let govProps = [], govHechas = {};
+async function govLeerBandeja(){
+  const files = await driveFind('gov_bandeja.json');
+  if(!files.length){ govProps=[]; return; }
+  const r = await driveFetch('https://www.googleapis.com/drive/v3/files/'+files[0].id+'?alt=media');
+  const j = await r.json();
+  govProps = Array.isArray(j.propuestas) ? j.propuestas : [];
+}
+async function govSync(manual){
+  try{
+    await govRespaldo();
+    await govLeerBandeja();
+    renderGov();
+    if(manual) toast('✓ Sincronizado con Gov');
+  }catch(e){
+    console.warn('gov sync', e);
+    renderGov(e.message==='sin-token');
+  }
+}
+window.govSync = govSync;
+function renderGov(sinToken){
+  const box=document.getElementById('gov-card'); if(!box) return;
+  const pend = govProps.filter(p=>p && p.id && !govHechas[p.id]);
+  const ult = localStorage.getItem('gov_ult_respaldo');
+  let h = '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">'
+    + '<div><b>🤝 Gov</b> <span style="opacity:.7;font-size:12px">'+(sinToken?'Drive sin conectar':(ult?'último respaldo: '+ult:'sin respaldo todavía'))+'</span></div>'
+    + '<div style="display:flex;gap:6px">'
+    + (sinToken?'<button class="btn" style="background:#fff8ec;border:1px solid rgba(0,0,0,.2)" onclick="govConectarDrive()">Conectar Drive</button>':'<button class="btn" style="background:#fff8ec;border:1px solid rgba(0,0,0,.2)" onclick="govSync(true)">↻ Sincronizar</button>')
+    + '<button class="btn" style="background:#fff8ec;border:1px solid rgba(0,0,0,.2)" onclick="govLogout()">Salir</button></div></div>';
+  if(pend.length){
+    h += '<div style="margin-top:10px;font-size:13px;font-weight:600">📬 Gov propone ('+pend.length+')</div>';
+    pend.forEach(p=>{
+      h += '<div style="margin-top:8px;padding:10px;border:1px solid rgba(0,0,0,.15);border-radius:10px;background:rgba(255,255,255,.35)">'
+        + '<div style="font-size:13px;line-height:1.5">'+escH(p.desc||'(sin descripción)')+'</div>'
+        + '<div style="margin-top:8px;display:flex;gap:6px"><button class="btn" style="background:#e3f1e3;border:1px solid #7ab87a;color:#2d6a2d" onclick="govAplicar(\''+p.id+'\')">✓ Aplicar</button>'
+        + '<button class="btn" style="background:#fff8ec;border:1px solid rgba(0,0,0,.2)" onclick="govDescartar(\''+p.id+'\')">✕ Descartar</button></div></div>';
+    });
+  }
+  box.innerHTML = h;
+}
+const escH = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+window.govAplicar = async function(id){
+  const p = govProps.find(x=>x.id===id); if(!p) return;
+  const ops = Array.isArray(p.ops)?p.ops:[];
+  for(const op of ops){
+    if(!GOV_COLS.includes(op.col) || !op.docId){ toast('Propuesta inválida'); return; }
+  }
+  for(const op of ops){
+    if(op.accion==='del') await fbDel(op.col, op.docId);
+    else if(op.accion==='set' && op.data && typeof op.data==='object') await fbSet(op.col, op.docId, op.data);
+  }
+  await fbSet('govHechas', id, {estado:'aplicada', fecha: new Date().toISOString(), desc: p.desc||''});
+  toast('✓ Aplicado');
+};
+window.govDescartar = async function(id){
+  const p = govProps.find(x=>x.id===id);
+  await fbSet('govHechas', id, {estado:'descartada', fecha: new Date().toISOString(), desc: p?.desc||''});
+  toast('Descartado');
+};
+
 
 // ===================================
 // DATOS INICIALES (60 trabajos + cobros)
@@ -2184,7 +2329,18 @@ window.copyExport = function() {
 // ===================================
 // ARRANCAR
 // ===================================
-init();
+let govArrancado=false;
+getRedirectResult(auth).then(r=>{ if(r) saveDriveToken(GoogleAuthProvider.credentialFromResult(r)); }).catch(e=>console.warn('redirect', e));
+onAuthStateChanged(auth, async user=>{
+  if(!user){ showLogin(); return; }
+  if((user.email||'').toLowerCase()!==OWNER_EMAIL){ await signOut(auth); showLogin('Esta cuenta no tiene acceso. Entrá con '+OWNER_EMAIL); return; }
+  if(govArrancado) return; govArrancado=true;
+  document.getElementById('splash-login').style.display='none';
+  document.getElementById('splash-spin').style.display='';
+  await init();
+  onSnapshot(collection(db,'govHechas'), snap=>{ govHechas={}; snap.docs.forEach(d=>govHechas[d.id]=d.data()); renderGov(!driveToken()); });
+  if(driveToken()) govSync(false); else renderGov(true);
+});
 initTareasListener();
 </script>
 </body>
