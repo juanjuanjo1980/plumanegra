@@ -1,4 +1,4 @@
-const CACHE = 'plumanegra-v20';
+const CACHE = 'plumanegra-v21';
 const ASSETS = ['/plumanegra/', '/plumanegra/index.html', '/plumanegra/manifest.json'];
 
 self.addEventListener('install', e => {
